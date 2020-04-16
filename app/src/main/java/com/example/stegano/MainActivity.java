@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         decoderButton = (Button) findViewById(R.id.decoderButton);
 
         encoderButton.setOnClickListener(methodButtonListener);
+        decoderButton.setOnClickListener(methodButtonListener);
 
         // TODO: Onboarding -> ois kova (View Pager)
     }

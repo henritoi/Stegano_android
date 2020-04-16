@@ -13,4 +13,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.TransparentActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/sansation</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="windowActionBar">true</item>
+    </style>
+
+    <style name="ToolBarStyle">
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 </resources>

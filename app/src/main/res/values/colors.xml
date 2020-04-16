@@ -6,4 +6,6 @@
 
     <color name="colorBackgroundPrimary">#8A25B1</color>
     <color name="colorBackgroundSecondary">#EFAD58</color>
+
+    <color name="colorText">@android:color/white</color>
 </resources>
