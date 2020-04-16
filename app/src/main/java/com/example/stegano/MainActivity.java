@@ -2,6 +2,7 @@ package com.example.stegano;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener methodButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent;
             switch (v.getId()) {
                 case R.id.encoderButton:
-                    // TODO: Open encoder (View Pager)
+                    intent = new Intent(MainActivity.this, EncoderActivity.class);
+                    startActivity(intent);
                     return;
                 case R.id.decoderButton:
-                    // TODO: Open decoder (View Pager)
+                    intent = new Intent(MainActivity.this, DecoderActivity.class);
+                    startActivity(intent);
                     return;
                 default:
                     return;
