@@ -1,4 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="toolbar_title_text_size">20sp</dimen>
+    <dimen name="step_size">20dp</dimen>
+    <dimen name="text_input_height">100dp</dimen>
+    <dimen name="alert_dialog_width">350dp</dimen>
+    <dimen name="alert_dialog_height">475dp</dimen>
 </resources>

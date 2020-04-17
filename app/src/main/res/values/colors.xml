@@ -8,4 +8,10 @@
     <color name="colorBackgroundSecondary">#EFAD58</color>
 
     <color name="colorText">@android:color/white</color>
+
+    <color name="colorWhiteTransparent">#B3FFFFFF</color>
+    <color name="colorSuccess">#48c774</color>
+    <color name="colorDanger">#f14668</color>
+    <color name="colorLightGray">#D3D3D3</color>
+    <color name="colorAlertDialog">#2F333F</color>
 </resources>

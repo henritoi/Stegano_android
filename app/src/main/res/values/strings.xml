@@ -3,13 +3,32 @@
     <string name="title_encoder">Encoder</string>
     <string name="title_decoder">Decoder</string>
     <string name="title_activity_encoder">EncoderActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_decoder">DecoderActivity</string>
+    <string name="title_step_1">Step 1</string>
+    <string name="title_step_2">Step 2</string>
+    <string name="title_step_3">Step 3</string>
+
+    <string name="step_continue">Continue</string>
+
+    <string name="title_encoder_image_selection_fragment">Select image</string>
+    <string name="encoder_image_selection_description">Select image from gallery or use camera to be used</string>
+    <string name="encoder_image_selection_button_gallery">Existing image</string>
+    <string name="encoder_image_selection_button_camera">Use camera</string>
+    <string name="encoder_image_selection_button_change_image">Change image</string>
+
+    <string name="title_encoder_message_fragment">Message</string>
+    <string name="encoder_message_textarea_hint">Write message that will be hidden</string>
+    <string name="encoder_message_description">Write your message that will be hidden inside the image</string>
+
+    <string name="title_encoder_cryption_fragment">Encryption</string>
+    <string name="encoder_cryption_description">Select how you want your message to be encrypted</string>
+    <string name="encoder_cryption_use_cryption_switch">Use encryption</string>
+
+    <string name="cryption_aes">AES</string>
+    <string name="cryption_caesar_cipher">Caesar cipher</string>
+
+    <string name="cancel_alert_title">Cancellation</string>
+    <string name="cancel_alert_description">Are you sure you want to cancel?</string>
+    <string name="alert_continue">Continue</string>
+    <string name="alert_cancel">Cancel</string>
 </resources>
