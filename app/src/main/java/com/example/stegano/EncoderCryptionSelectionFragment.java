@@ -20,7 +20,7 @@ import android.widget.Switch;
  */
 public class EncoderCryptionSelectionFragment extends Fragment {
     private static final String TAG = "EncoderCryptionSelectio";
-    private EventListener listener;
+    private EncoderEventListener listener;
 
     Button generateButton;
     Switch useEncryptionSwitch;
@@ -34,8 +34,8 @@ public class EncoderCryptionSelectionFragment extends Fragment {
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-        if(activity instanceof EventListener) {
-            listener = (EventListener)activity;
+        if(activity instanceof EncoderEventListener) {
+            listener = (EncoderEventListener)activity;
         } else {
             // Throw an error!
         }

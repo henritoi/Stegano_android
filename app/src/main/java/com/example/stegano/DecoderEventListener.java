@@ -1,9 +1,8 @@
 package com.example.stegano;
 
-public interface EventListener {
+public interface DecoderEventListener {
     public void nextPage();
     public void previousPage();
 
     public void imageSelected(boolean isSelected);
-    public void messageSet(boolean isSet);
 }

@@ -1,30 +1,20 @@
 package com.example.stegano;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
-import java.util.Base64;
-
-public class EncoderActivity extends AppCompatActivity implements EventListener {
+public class EncoderActivity extends AppCompatActivity implements EncoderEventListener {
     private static final String TAG = "EncoderActivity";
 
     private EncoderViewPager encoderViewPager;
@@ -53,7 +43,7 @@ public class EncoderActivity extends AppCompatActivity implements EventListener 
 
         encoderTabDots = findViewById(R.id.encoderTabDots);
         encoderTabDots.setupWithViewPager(encoderViewPager, true);
-        
+
         cancelDialog = new Dialog(this);
     }
 

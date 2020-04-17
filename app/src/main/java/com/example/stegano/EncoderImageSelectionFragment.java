@@ -17,8 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.util.Base64;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +29,7 @@ public class EncoderImageSelectionFragment extends Fragment {
 
     private boolean isImageSelected = false;
 
-    private EventListener listener;
+    private EncoderEventListener listener;
 
     private ImageView previewImageView;
     private Button existingImageButton;
@@ -50,8 +48,8 @@ public class EncoderImageSelectionFragment extends Fragment {
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-        if(activity instanceof EventListener) {
-            listener = (EventListener)activity;
+        if(activity instanceof EncoderEventListener) {
+            listener = (EncoderEventListener)activity;
         } else {
             // Throw an error!
         }

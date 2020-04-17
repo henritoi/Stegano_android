@@ -1,7 +1,6 @@
 package com.example.stegano;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,7 +19,7 @@ import android.widget.EditText;
  */
 public class EncoderMessageFragment extends Fragment {
     private static final String TAG = "EncoderMessageFragment";
-    private EventListener listener;
+    private EncoderEventListener listener;
 
     Button continueButton;
     EditText messageEditText;
@@ -36,8 +34,8 @@ public class EncoderMessageFragment extends Fragment {
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-        if(activity instanceof EventListener) {
-            listener = (EventListener)activity;
+        if(activity instanceof EncoderEventListener) {
+            listener = (EncoderEventListener)activity;
         } else {
             // Throw an error!
         }
