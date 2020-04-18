@@ -66,6 +66,20 @@
             android:entries="@array/encryption_types"
             android:popupTheme="@style/SpinnerTheme"
             android:spinnerMode="dialog" />
+
+        <EditText
+            android:id="@+id/aesSecretEditText"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/caesarCipherEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
     </LinearLayout>
 
     <Button

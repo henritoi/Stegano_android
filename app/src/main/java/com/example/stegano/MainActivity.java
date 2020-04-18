@@ -2,58 +2,53 @@ package com.example.stegano;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private static final long SPLASH_SCREEN_TIME = 3000;
 
-    private Button encoderButton;
-    private Button decoderButton;
+    TextView title;
+    Animation top_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Hide status bar
-        if(Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }else {
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
+
 
         setContentView(R.layout.activity_main);
-        encoderButton = (Button) findViewById(R.id.encoderButton);
-        decoderButton = (Button) findViewById(R.id.decoderButton);
 
-        encoderButton.setOnClickListener(methodButtonListener);
-        decoderButton.setOnClickListener(methodButtonListener);
+        title = findViewById(R.id.appNameTextView);
+        top_animation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
 
-        // TODO: Onboarding -> ois kova (View Pager)
-    }
+        title.setAnimation(top_animation);
 
-    private View.OnClickListener methodButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent;
-            switch (v.getId()) {
-                case R.id.encoderButton:
-                    intent = new Intent(MainActivity.this, EncoderActivity.class);
-                    startActivity(intent);
-                    return;
-                case R.id.decoderButton:
-                    intent = new Intent(MainActivity.this, DecoderActivity.class);
-                    startActivity(intent);
-                    return;
-                default:
-                    return;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(title, "tn_app_title");
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+
+                startActivity(intent, options.toBundle());
+                finish();
             }
-        }
-    };
+        }, SPLASH_SCREEN_TIME);
+    }
 }
