@@ -3,6 +3,7 @@ package com.example.stegano;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 public class EncoderActivity extends AppCompatActivity implements EncoderEventListener {
@@ -29,6 +31,17 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Hide status bar
+        if(Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+
         setContentView(R.layout.activity_encoder);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

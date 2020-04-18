@@ -1,6 +1,7 @@
 package com.example.stegano;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 public class DecoderActivity extends AppCompatActivity implements DecoderEventListener{
     private static final String TAG = "DecoderActivity";
@@ -23,6 +25,16 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Hide status bar
+        if(Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+
         setContentView(R.layout.activity_decoder);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
