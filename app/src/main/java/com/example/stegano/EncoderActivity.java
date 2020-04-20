@@ -1,16 +1,22 @@
 package com.example.stegano;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.example.stegano.steganografia.coders.Decoder;
+import com.example.stegano.steganografia.coders.Encoder;
+import com.example.stegano.steganografia.image.BufferedImage;
+import com.example.stegano.steganografia.utils.BitUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,8 +29,9 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     private TabLayout encoderTabDots;
     private EncoderViewPagerAdapter encoderViewPagerAdapter;
 
-    private boolean isImageSelected = false;
-    private boolean isMessageSet = false;
+
+    private Bitmap selectedImage = null;
+    private String message = "";
 
     private Dialog cancelDialog;
 
@@ -72,12 +79,20 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         if(hasPreviousPage()) {
             previousPage();
         }else {
-            if (isImageSelected || isMessageSet) {
+            if (hasSelectedImage() || hasMessage()) {
                 showCancelDialog();
             } else {
                 finish();
             }
         }
+    }
+
+    private boolean hasSelectedImage() {
+        return selectedImage != null;
+    }
+
+    private boolean hasMessage() {
+        return message.length() > 0;
     }
 
     private void showCancelDialog() {
@@ -128,12 +143,34 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     }
 
     @Override
-    public void imageSelected(boolean isSelected) {
-        isImageSelected = isSelected;
+    public void setSelectedImage(Bitmap image) {
+        selectedImage = image;
+
+        //if(hasSelectedImage()) {
+        //    testCryption(image);
+        //}
     }
 
     @Override
-    public void messageSet(boolean isSet) {
-        isMessageSet = isSet;
+    public void setMessage(String message) {
+        message = message;
+    }
+
+
+    private void testCryption(Bitmap bitmap) {
+        Log.d(TAG, "testCryption: Testing coders");
+
+        String string = "Testi1234";
+        Encoder encoder = new Encoder(new BufferedImage(bitmap));
+
+        BufferedImage encodedImage = encoder.encode(string.getBytes());
+
+        Bitmap enBitmap = encodedImage.getBitmap();
+
+        Decoder decoder = new Decoder(new BufferedImage(enBitmap));
+
+        byte[] decodedMessage = decoder.decode();
+
+        Log.d(TAG, "testCryption: Decoded:" + new String(decodedMessage));
     }
 }

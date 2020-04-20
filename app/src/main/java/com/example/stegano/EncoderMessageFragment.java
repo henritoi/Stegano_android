@@ -74,12 +74,12 @@ public class EncoderMessageFragment extends Fragment {
             if(s.toString().length() == 0) {
                 if(continueButton.isEnabled()) {
                     continueButton.setEnabled(false);
-                    listener.messageSet(false);
+                    listener.setMessage("");
                 }
             } else {
                 if(!continueButton.isEnabled()) {
                     continueButton.setEnabled(true);
-                    listener.messageSet(true);
+                    listener.setMessage(s.toString());
                 }
             }
         }

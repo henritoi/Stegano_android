@@ -1,9 +1,11 @@
 package com.example.stegano;
 
+import android.graphics.Bitmap;
+
 public interface EncoderEventListener {
     public void nextPage();
     public void previousPage();
 
-    public void imageSelected(boolean isSelected);
-    public void messageSet(boolean isSet);
+    public void setSelectedImage(Bitmap image);
+    public void setMessage(String message);
 }

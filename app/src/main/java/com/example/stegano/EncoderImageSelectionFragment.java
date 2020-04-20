@@ -1,8 +1,15 @@
 package com.example.stegano;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -26,6 +33,8 @@ public class EncoderImageSelectionFragment extends Fragment {
 
     private static final int CAMERA_REQUEST_CODE = 0;
     private static final int GALLERY_REQUEST_CODE = 1;
+    private static final int USE_CAMERA_PERMISSION_REQUEST_CODE = 2;
+    private static final int READ_EXTERNAL_PERMISSION_REQUEST_CODE = 3;
 
     private boolean isImageSelected = false;
 
@@ -108,21 +117,32 @@ public class EncoderImageSelectionFragment extends Fragment {
     };
 
     private void pickExistingImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+        if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                    READ_EXTERNAL_PERMISSION_REQUEST_CODE);
+        }else {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, GALLERY_REQUEST_CODE);
+        }
     }
 
     private void useCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+        if(getContext().checkSelfPermission(Manifest.permission.CAMERA) !=
+                PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[] { Manifest.permission.CAMERA },
+                    USE_CAMERA_PERMISSION_REQUEST_CODE);
+        }else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, CAMERA_REQUEST_CODE);
+        }
     }
 
     private void removeImageSelection() {
         isImageSelected = false;
-        listener.imageSelected(false);
+        listener.setSelectedImage(null);
         previewImageView.setImageResource(R.drawable.ic_image_white_50dp);
 
         imageSelectionButtonsLinearLayout.setVisibility(View.VISIBLE);
@@ -133,13 +153,51 @@ public class EncoderImageSelectionFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        previewImageView.setImageBitmap(bitmap);
+        Log.d(TAG, "onActivityResult: result code:" + resultCode);
 
-        isImageSelected = true;
-        listener.imageSelected(true);
+        if(requestCode == CAMERA_REQUEST_CODE
+                && resultCode == Activity.RESULT_OK
+                && data != null) {
 
-        imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
-        imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            previewImageView.setImageBitmap(bitmap);
+
+            isImageSelected = true;
+            listener.setSelectedImage(bitmap);
+
+            imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
+            imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+
+        }else if (requestCode == GALLERY_REQUEST_CODE
+                && resultCode == Activity.RESULT_OK
+                && data != null) {
+
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getActivity().getContentResolver().query(
+                    selectedImage,
+                    filePathColumn,
+                    null,
+                    null,
+                    null
+            );
+
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String imagePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+            previewImageView.setImageBitmap(bitmap);
+
+            isImageSelected = true;
+            listener.setSelectedImage(bitmap);
+
+            imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
+            imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+        }
     }
 }
