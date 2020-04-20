@@ -1,4 +1,4 @@
-package com.example.stegano.steganografia.image.awt;
+package com.example.stegano.steganografia.image;
 
 import android.graphics.Bitmap;
 

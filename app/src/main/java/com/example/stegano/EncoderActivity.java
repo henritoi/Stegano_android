@@ -146,9 +146,9 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     public void setSelectedImage(Bitmap image) {
         selectedImage = image;
 
-        //if(hasSelectedImage()) {
-        //    testCryption(image);
-        //}
+        if(hasSelectedImage()) {
+            testCryption(image);
+        }
     }
 
     @Override
