@@ -119,6 +119,7 @@ public class EncoderImageSelectionFragment extends Fragment {
     private void pickExistingImage() {
         if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
+
             requestPermissions(
                     new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
                     READ_EXTERNAL_PERMISSION_REQUEST_CODE);
@@ -152,8 +153,6 @@ public class EncoderImageSelectionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        Log.d(TAG, "onActivityResult: result code:" + resultCode);
 
         if(requestCode == CAMERA_REQUEST_CODE
                 && resultCode == Activity.RESULT_OK
@@ -189,15 +188,46 @@ public class EncoderImageSelectionFragment extends Fragment {
             String imagePath = cursor.getString(columnIndex);
             cursor.close();
 
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            try {
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
 
-            previewImageView.setImageBitmap(bitmap);
+                previewImageView.setImageBitmap(bitmap);
 
-            isImageSelected = true;
-            listener.setSelectedImage(bitmap);
+                isImageSelected = true;
+                listener.setSelectedImage(bitmap);
 
-            imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
-            imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+                imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
+                imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+            }catch (Exception e) {
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case USE_CAMERA_PERMISSION_REQUEST_CODE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    useCamera();
+                }else {
+                    // TODO: Notify user that app requires camera permission
+                }
+                return;
+            case READ_EXTERNAL_PERMISSION_REQUEST_CODE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    pickExistingImage();
+                }else {
+                    // TODO: Notify user that app requires read external permission
+                }
+                return;
         }
     }
 }

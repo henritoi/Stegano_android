@@ -24,16 +24,44 @@
     <string name="encoder_cryption_description">Select how you want your message to be encrypted</string>
     <string name="encoder_cryption_use_cryption_switch">Use encryption</string>
 
+    <string name="encryption_method">Encryption method</string>
     <string name="cryption_aes">AES</string>
+    <string name="cryption_aes_secret">Secret</string>
+    <string name="cryption_aes_guide">Secret will be used for both encryption and decryption of the message</string>
     <string name="cryption_caesar_cipher">Caesar cipher</string>
+    <string name="cryption_caesar_cipher_guide">Select how much alphabets are shifted</string>
+    <string name="cryption_caesar_cipher_shift_key">Shift key</string>
+
+    <string name="encoding_success_title">Encoding was successful!</string>
+    <string name="encoding_success_description">Encoded image has been saved successfully.</string>
+    <string name="encoding_success_share_button">Share</string>
+    <string name="encoding_success_done_button">Done</string>
+    <string name="encode_success_share_image">Share image</string>
+
+    <string name="encode_error_title">Error has occured</string>
+    <string name="encode_error_image_selection">Error has occured while trying to get selected image.</string>
+    <string name="encode_error_message_encryption">Error has occured while trying to encrypt message.</string>
+    <string name="encode_error_get_message">Error has occured while trying to get message.</string>
+    <string name="encode_error_image_encode">Error has occured while trying to encode message to image.</string>
+    <string name="encode_error_image_save">Error has occured while trying to save image.</string>
+    <string name="encode_error_write_permission_required">App requires write permission to work correctly!</string>
 
     <string name="decoder_scan">Scan</string>
     <string name="decoder_pick_image">Pick image</string>
+    <string name="decoder_image_selection_button_gallery">Select image</string>
+    <string name="decoder_image_selection_description">Select image that you want to scan</string>
 
     <string name="cancel_alert_title">Cancellation</string>
-    <string name="cancel_alert_description">Are you sure you want to cancel?</string>
-    <string name="alert_continue">Continue</string>
-    <string name="alert_cancel">Cancel</string>
+    <string name="cancel_alert_description">Are you sure you want to delete your progress?</string>
+    <string name="alert_yes">Yes</string>
+    <string name="alert_no">Cancel</string>
+
+    <string name="error_title_default">Error</string>
+    <string name="error_description_default">Some error has occured</string>
+    <string name="error_ok_default">OK</string>
 
     <string name="camera_permission_explanation">App requires permission to use the camera</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

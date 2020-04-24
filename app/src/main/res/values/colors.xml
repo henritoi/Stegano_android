@@ -14,4 +14,5 @@
     <color name="colorDanger">#f14668</color>
     <color name="colorLightGray">#D3D3D3</color>
     <color name="colorAlertDialog">#2F333F</color>
+    <color name="colorAlertDialogTransparent">#1A2F333F</color>
 </resources>

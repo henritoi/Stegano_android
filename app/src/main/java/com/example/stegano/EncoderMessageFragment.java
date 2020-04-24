@@ -35,7 +35,7 @@ public class EncoderMessageFragment extends Fragment {
     {
         super.onAttach(activity);
         if(activity instanceof EncoderEventListener) {
-            listener = (EncoderEventListener)activity;
+            listener = (EncoderEventListener) activity;
         } else {
             // Throw an error!
         }
@@ -72,14 +72,14 @@ public class EncoderMessageFragment extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.toString().length() == 0) {
+                listener.setMessage("");
                 if(continueButton.isEnabled()) {
                     continueButton.setEnabled(false);
-                    listener.setMessage("");
                 }
             } else {
+                listener.setMessage(s.toString());
                 if(!continueButton.isEnabled()) {
                     continueButton.setEnabled(true);
-                    listener.setMessage(s.toString());
                 }
             }
         }

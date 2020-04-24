@@ -41,10 +41,12 @@ public class DashboardActivity extends AppCompatActivity {
                 case R.id.encoderButton:
                     intent = new Intent(DashboardActivity.this, EncoderActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                     return;
                 case R.id.decoderButton:
                     intent = new Intent(DashboardActivity.this, DecoderActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                     return;
                 default:
                     return;

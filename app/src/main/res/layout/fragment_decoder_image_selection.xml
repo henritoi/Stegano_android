@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DecoderImageSelectionFragment">
-
+    tools:context=".EncoderImageSelectionFragment">
 
     <TextView
-        android:id="@+id/stepTitleTextView"
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/title_step_1"
+        android:text="@string/decoder_pick_image"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageSelectionLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <LinearLayout
         android:id="@+id/imageSelectionLinearLayout"
@@ -45,25 +44,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:text="@string/encoder_image_selection_description" />
+            android:text="@string/decoder_image_selection_description" />
 
-        <LinearLayout
-            android:id="@+id/imageSelectionButtonsLinearLayout"
+        <Button
+            android:id="@+id/existingImageButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/existingImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:text="@string/decoder_pick_image" />
-
-        </LinearLayout>
+            android:background="@drawable/button_background"
+            android:text="@string/decoder_image_selection_button_gallery" />
 
         <LinearLayout
             android:id="@+id/imageSelectedButtonsLinearLayout"
@@ -81,7 +71,7 @@
                 android:text="@string/encoder_image_selection_button_change_image" />
 
             <Button
-                android:id="@+id/continueButton"
+                android:id="@+id/scanButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background_success"

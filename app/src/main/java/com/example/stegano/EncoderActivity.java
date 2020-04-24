@@ -1,16 +1,18 @@
 package com.example.stegano;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 
 import com.example.stegano.steganografia.coders.Decoder;
 import com.example.stegano.steganografia.coders.Encoder;
+import com.example.stegano.steganografia.crypters.CryptionType;
 import com.example.stegano.steganografia.image.BufferedImage;
-import com.example.stegano.steganografia.utils.BitUtil;
+import com.example.stegano.util.CustomDialog;
+import com.example.stegano.util.InformativeDialog;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +20,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class EncoderActivity extends AppCompatActivity implements EncoderEventListener {
     private static final String TAG = "EncoderActivity";
@@ -29,11 +32,11 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     private TabLayout encoderTabDots;
     private EncoderViewPagerAdapter encoderViewPagerAdapter;
 
-
     private Bitmap selectedImage = null;
     private String message = "";
 
-    private Dialog cancelDialog;
+    private CustomDialog cancelDialog;
+    private InformativeDialog errorDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,10 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         encoderTabDots = findViewById(R.id.encoderTabDots);
         encoderTabDots.setupWithViewPager(encoderViewPager, true);
 
-        cancelDialog = new Dialog(this);
+        disableTabDotClicks();
+
+        cancelDialog = new CustomDialog(this);
+        errorDialog = new InformativeDialog(this);
     }
 
     @Override
@@ -83,6 +89,7 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
                 showCancelDialog();
             } else {
                 finish();
+                overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
             }
         }
     }
@@ -96,35 +103,9 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     }
 
     private void showCancelDialog() {
-        Button alertCancelButton;
-        Button alertContinueButton;
-
-        cancelDialog.setContentView(R.layout.alert_dialog);
-
-        alertCancelButton = (Button) cancelDialog.findViewById(R.id.alertCancelButton);
-        alertContinueButton = (Button) cancelDialog.findViewById(R.id.alertContinueButton);
-
-        alertCancelButton.setOnClickListener(handleAlertClick);
-        alertContinueButton.setOnClickListener(handleAlertClick);
-
         cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cancelDialog.show();
     }
-
-    private View.OnClickListener handleAlertClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.alertCancelButton:
-                    cancelDialog.dismiss();
-                    finish();
-                    return;
-                case R.id.alertContinueButton:
-                    cancelDialog.dismiss();
-                    return;
-            }
-        }
-    };
 
     @Override
     public void nextPage() {
@@ -145,18 +126,47 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     @Override
     public void setSelectedImage(Bitmap image) {
         selectedImage = image;
-
-        if(hasSelectedImage()) {
-            testCryption(image);
-        }
     }
 
     @Override
     public void setMessage(String message) {
-        message = message;
+        this.message = message;
     }
 
+    @Override
+    public String getMessage() {
+        return this.message;
+    }
 
+    @Override
+    public void showError(String message) {
+        errorDialog.setDialogTitle(getString(R.string.encode_error_title));
+        errorDialog.setDialogDescription(message);
+
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorDialog.show();
+    }
+
+    @Override
+    public Bitmap getSelectedImage() {
+        return selectedImage;
+    }
+
+    private void disableTabDotClicks() {
+        encoderTabDots.clearOnTabSelectedListeners();
+
+        LinearLayout dotStrip = ((LinearLayout) encoderTabDots.getChildAt(0));
+        for(int i = 0; i < dotStrip.getChildCount(); i++) {
+            dotStrip.getChildAt(i).setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
+        }
+    }
+
+    // Temporary test for library
     private void testCryption(Bitmap bitmap) {
         Log.d(TAG, "testCryption: Testing coders");
 
