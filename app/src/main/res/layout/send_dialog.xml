@@ -13,22 +13,34 @@
         android:id="@+id/sendDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/cancel_alert_title"
+        android:text="@string/send_dialog_title"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/sendDialogImagePreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sendDialogTitle"
+        app:srcCompat="@drawable/ic_image_white_50dp" />
+
     <TextView
         android:id="@+id/sendDialogDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/cancel_alert_description"
+        android:layout_marginEnd="16dp"
+        android:text="@string/send_dialog_description"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/sendDialogImagePreview" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,24 +53,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertDescription">
+        app:layout_constraintTop_toBottomOf="@+id/sendDialogDescription">
 
         <Button
-            android:id="@+id/alertNoButton"
+            android:id="@+id/sendDialogDecodeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:background="@drawable/button_background_alert"
-            android:text="@string/alert_no" />
+            android:background="@drawable/button_background"
+            android:text="@string/send_dialog_decode" />
 
         <Button
-            android:id="@+id/alertYesButton"
+            android:id="@+id/sendDialogEncodeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:background="@drawable/button_background_success"
-            android:text="@string/alert_yes" />
+            android:background="@drawable/button_background"
+            android:text="@string/send_dialog_encode" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

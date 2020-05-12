@@ -1,4 +1,4 @@
-package com.example.stegano;
+package com.example.stegano.encoder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.stegano.MainApplication;
+import com.example.stegano.R;
 import com.example.stegano.util.Variables;
 
 import java.io.File;
+
+import static com.example.stegano.util.Helpers.isNull;
 
 public class EncodeSuccessActivity extends AppCompatActivity {
     private static final String TAG = "EncodeSuccessActivity";
@@ -55,7 +59,7 @@ public class EncodeSuccessActivity extends AppCompatActivity {
         // Get stored bitmap
         bitmap = application.getBitmap();
         // If isset -> display
-        if(bitmap != null) {
+        if(!isNull(bitmap)) {
             encodedImagePreview.setImageBitmap(bitmap);
         }
     }

@@ -1,4 +1,4 @@
-package com.example.stegano;
+package com.example.stegano.encoder;
 
 import android.content.Context;
 import android.util.AttributeSet;

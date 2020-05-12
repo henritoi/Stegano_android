@@ -1,4 +1,4 @@
-package com.example.stegano;
+package com.example.stegano.decoder;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,8 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.stegano.MainApplication;
+import com.example.stegano.R;
+import com.example.stegano.steganografia.coders.Decoder;
+import com.example.stegano.steganografia.image.BufferedImage;
+import com.example.stegano.util.FullScreenDialog;
+import com.example.stegano.util.Variables;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
@@ -35,13 +48,31 @@ public class DecoderImageSelectionFragment extends Fragment {
     private LinearLayout imageSelectedButtonsLinearLayout;
     private ImageView previewImageView;
 
+    private DecoderEventListener listener;
+
     private static final int GALLERY_REQUEST_CODE = 0;
     private static final int READ_EXTERNAL_PERMISSION_REQUEST_CODE = 1;
 
+    private DialogFragment loadingScreen;
+
     private boolean isImageSelected = false;
+
+    private MainApplication application;
+
 
     public DecoderImageSelectionFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        if(activity instanceof DecoderEventListener) {
+            listener = (DecoderEventListener) activity;
+        } else {
+            // Throw an error!
+        }
     }
 
 
@@ -59,9 +90,14 @@ public class DecoderImageSelectionFragment extends Fragment {
 
         previewImageView = view.findViewById(R.id.previewImageView);
 
+        loadingScreen = FullScreenDialog.newInstance();
+
         existingImageButton.setOnClickListener(handleButtonClick);
         changeImageButton.setOnClickListener(handleButtonClick);
         scanButton.setOnClickListener(handleButtonClick);
+
+        application = ((MainApplication) getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -79,7 +115,7 @@ public class DecoderImageSelectionFragment extends Fragment {
                     break;
                 case R.id.scanButton:
                     Log.d(TAG, "onClick: Scan");
-                    // TODO
+                    decodeImage();
                     break;
             }
         }
@@ -100,6 +136,7 @@ public class DecoderImageSelectionFragment extends Fragment {
 
     private void removeImageSelection() {
         isImageSelected = false;
+        listener.setSelectedImage(null);
         previewImageView.setImageResource(R.drawable.ic_image_white_50dp);
 
         existingImageButton.setVisibility(View.VISIBLE);
@@ -112,7 +149,7 @@ public class DecoderImageSelectionFragment extends Fragment {
 
         if (requestCode == GALLERY_REQUEST_CODE
                 && resultCode == Activity.RESULT_OK
-                && data != null) {
+                && !isNull(data)) {
 
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -137,6 +174,7 @@ public class DecoderImageSelectionFragment extends Fragment {
                 previewImageView.setImageBitmap(bitmap);
 
                 isImageSelected = true;
+                listener.setSelectedImage(bitmap);
 
                 existingImageButton.setVisibility(View.GONE);
                 imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
@@ -144,5 +182,70 @@ public class DecoderImageSelectionFragment extends Fragment {
 
             }
         }
+    }
+
+    private void showLoader() {
+        loadingScreen.show(getActivity().getSupportFragmentManager(), "loader");
+    }
+
+    private void hideLoader() {
+        loadingScreen.dismiss();
+    }
+
+    private void decodeImage() {
+        final Bitmap bitmap = listener.getSelectedImage();
+
+        if(isNull(bitmap)) {
+            removeImageSelection(); // Start again
+            listener.showError(getString(R.string.decode_error_image_not_selected));
+            return;
+        }
+
+        showLoader();
+
+        // To show scanning screen
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Decoder decoder = new Decoder(new BufferedImage(bitmap));
+
+                int messageLength = decoder.decodeMessageLength();
+
+                if(messageLength <= 0) {
+                    hideLoader();
+                    removeImageSelection();
+                    listener.noMessageFound();
+                    return;
+                }
+
+                Log.d(TAG, "decodeImage: " + messageLength);
+
+                byte[] message;
+
+                try {
+                    // For safety reasons
+                    message = decoder.decode();
+                }catch (Exception e) {
+                    hideLoader();
+                    removeImageSelection();
+                    listener.noMessageFound();
+                    return;
+                }
+
+                if(message.length < 1) {
+                    hideLoader();
+                    removeImageSelection();
+                    listener.noMessageFound();
+                    return;
+                }
+                // Store message to global
+                application.setMessage(new String(message));
+                Intent intent = new Intent(getActivity(), DecodeSuccessActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                return;
+            }
+        }, 2000);
     }
 }

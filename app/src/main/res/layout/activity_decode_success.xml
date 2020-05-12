@@ -5,71 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".encoder.EncodeSuccessActivity">
+    tools:context=".decoder.DecodeSuccessActivity">
 
     <TextView
-        android:id="@+id/encodeSuccessTitle"
+        android:id="@+id/decodeSuccessTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/encoding_success_title"
+        android:text="@string/decoding_success_title"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/encodedImagePreview"
-        android:layout_width="218dp"
-        android:layout_height="206dp"
+    <TextView
+        android:id="@+id/decodeSuccessDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/decoding_success_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decodeSuccessTitle" />
+
+    <TextView
+        android:id="@+id/decodedMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/encodeSuccessDescription"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical"
+        android:scrollbars="vertical"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/decryptMessageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/encodeSuccessTitle"
-        app:srcCompat="@drawable/ic_image_white_50dp" />
-
-    <TextView
-        android:id="@+id/encodeSuccessDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/encoding_success_description"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/encodeSuccessShareButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/decodeSuccessDescription"
+        tools:text="@string/default_empty" />
 
     <Button
-        android:id="@+id/encodeSuccessShareButton"
+        android:id="@+id/decryptMessageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_selector"
-        android:text="@string/encoding_success_share_button"
-        app:layout_constraintBottom_toTopOf="@+id/encodeSuccessDoneButton"
+        android:background="@drawable/button_background"
+        android:text="@string/decoding_success_decrypt_button"
+        app:layout_constraintBottom_toTopOf="@+id/decodeDoneButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/encodeSuccessDoneButton"
+        android:id="@+id/decodeDoneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/button_background"
-        android:text="@string/encoding_success_done_button"
+        android:background="@drawable/button_background_success"
+        android:text="@string/decoding_success_done_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

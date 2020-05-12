@@ -4,4 +4,10 @@
         <item name="aes">@string/cryption_aes</item>
         <item name="caesar">@string/cryption_caesar_cipher</item>
     </string-array>
+
+    <string-array name="encryption_types_with_none">
+        <item name="none">@string/cryption_none</item>
+        <item name="aes">@string/cryption_aes</item>
+        <item name="caesar">@string/cryption_caesar_cipher</item>
+    </string-array>
 </resources>

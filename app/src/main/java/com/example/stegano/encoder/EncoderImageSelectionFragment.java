@@ -1,9 +1,7 @@
-package com.example.stegano;
+package com.example.stegano.encoder;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -23,6 +21,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.stegano.R;
+import com.example.stegano.encoder.EncoderEventListener;
+
+import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
@@ -169,7 +172,7 @@ public class EncoderImageSelectionFragment extends Fragment {
 
         }else if (requestCode == GALLERY_REQUEST_CODE
                 && resultCode == Activity.RESULT_OK
-                && data != null) {
+                && !isNull(data)) {
 
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };

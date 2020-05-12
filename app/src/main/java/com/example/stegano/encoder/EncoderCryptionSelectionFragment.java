@@ -1,13 +1,14 @@
-package com.example.stegano;
+package com.example.stegano.encoder;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.example.stegano.BuildConfig;
+import com.example.stegano.MainApplication;
+import com.example.stegano.R;
 import com.example.stegano.steganografia.coders.Encoder;
 import com.example.stegano.steganografia.crypters.CryptionType;
 import com.example.stegano.steganografia.crypters.other.CaesarCipher;
@@ -39,8 +43,12 @@ import com.example.stegano.steganografia.image.BufferedImage;
 import com.example.stegano.util.Variables;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.Objects;
+
+import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
@@ -116,7 +124,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             // Get image with listener
             Bitmap startImage = listener.getSelectedImage();
 
-            if(startImage == null) {
+            if(isNull(startImage)) {
                 listener.showError(getString(R.string.encode_error_image_selection));
                 return;
             }
@@ -136,7 +144,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             // Encrypt message
             byte[] encryptedMessage = encryptMessage(message);
 
-            if(encryptedMessage == null) {
+            if(isNull(encryptedMessage)) {
                 listener.showError(getString(R.string.encode_error_message_encryption));
                 return;
             }
@@ -144,7 +152,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             // Encode message to image
             Bitmap encodedImage = encoder.encode(encryptedMessage).getBitmap();
 
-            if(encodedImage == null) {
+            if(isNull(encodedImage)) {
                 listener.showError(getString(R.string.encode_error_image_encode));
                 return;
             }
@@ -153,7 +161,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             String filename = System.currentTimeMillis() + ".png";
             Uri location = saveImage(encodedImage, filename);
 
-            if(location == null) {
+            Log.d(TAG, "generateImage: " + location.toString());
+
+            if(isNull(location)) {
                 listener.showError(getString(R.string.encode_error_image_save));
                 return;
             }
@@ -186,12 +196,13 @@ public class EncoderCryptionSelectionFragment extends Fragment {
     };
 
     private Uri saveImage(Bitmap bitmap, String filename) {
-        if(bitmap == null) return null;
+        if(isNull(bitmap)) return null;
 
         boolean saved;
         OutputStream outputStream;
         Uri imageUri;
 
+        // Save images > Android Q
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentResolver resolver = getContext().getContentResolver();
             ContentValues contentValues = new ContentValues();
@@ -206,10 +217,12 @@ public class EncoderCryptionSelectionFragment extends Fragment {
                 return null; // Error shown when null
             }
         }else {
+            // Not yet working
             String imagesDirectory = Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DCIM).toString()
                     + File.separator
                     + Variables.IMAGES_FOLDER_NAME;
+
             File file = new File(imagesDirectory);
 
             if(!file.exists()) {
@@ -217,9 +230,10 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             }
 
             File image = new File(imagesDirectory, filename);
+
             try {
                 outputStream = new FileOutputStream(image);
-                imageUri = FileProvider.getUriForFile(getContext(), BuildConfig.APPLICATION_ID + ".provider", image);
+                imageUri = Uri.parse(image.getAbsolutePath());
             }catch(Exception e) {
                 Log.e(TAG, "saveImage: ", e);
                 return null;
@@ -234,6 +248,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             Log.e(TAG, "saveImage: ", e);
             return null;
         }
+
         return saved ? imageUri : null;
     }
 

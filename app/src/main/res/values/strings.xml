@@ -25,6 +25,7 @@
     <string name="encoder_cryption_use_cryption_switch">Use encryption</string>
 
     <string name="encryption_method">Encryption method</string>
+    <string name="cryption_none">None</string>
     <string name="cryption_aes">AES</string>
     <string name="cryption_aes_secret">Secret</string>
     <string name="cryption_aes_guide">Secret will be used for both encryption and decryption of the message</string>
@@ -51,6 +52,17 @@
     <string name="decoder_image_selection_button_gallery">Select image</string>
     <string name="decoder_image_selection_description">Select image that you want to scan</string>
 
+    <string name="decoding_success_title">Decoding was successful!</string>
+    <string name="decoding_success_description">Message was found from the given image:</string>
+    <string name="decoding_success_decrypt_button">Decrypt</string>
+    <string name="decoding_success_done_button">Done</string>
+
+    <string name="decode_error_title">Error has occured</string>
+    <string name="decode_error_image_not_selected">Error occured while trying to get selected image</string>
+    <string name="decode_error_title_no_message_found">Message not found!</string>
+    <string name="decode_error_no_message_found">Could not find any messages in given image. Please try another one.</string>
+
+
     <string name="cancel_alert_title">Cancellation</string>
     <string name="cancel_alert_description">Are you sure you want to delete your progress?</string>
     <string name="alert_yes">Yes</string>
@@ -61,7 +73,17 @@
     <string name="error_ok_default">OK</string>
 
     <string name="camera_permission_explanation">App requires permission to use the camera</string>
+    <string name="loading_title">Scanning...</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="decrypt_dialog_title">Decrpytion options</string>
+    <string name="decrypt_dialog_description">Select decryption method for decryption of the message</string>
+    <string name="decrypt_dialog_ok_button">Decrypt</string>
+    <string name="decrypt_dialog_cancel_button">Cancel</string>
+
+    <string name="default_empty"> </string>
+
+    <string name="send_dialog_title">Select coding method</string>
+    <string name="send_dialog_encode">Encode</string>
+    <string name="send_dialog_decode">Decode</string>
+    <string name="send_dialog_description">Would you like to encode or decode the selected image?</string>
 </resources>

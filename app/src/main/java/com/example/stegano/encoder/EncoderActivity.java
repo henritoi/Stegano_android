@@ -1,16 +1,11 @@
-package com.example.stegano;
+package com.example.stegano.encoder;
 
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 
-import com.example.stegano.steganografia.coders.Decoder;
-import com.example.stegano.steganografia.coders.Encoder;
-import com.example.stegano.steganografia.crypters.CryptionType;
-import com.example.stegano.steganografia.image.BufferedImage;
+import com.example.stegano.R;
 import com.example.stegano.util.CustomDialog;
 import com.example.stegano.util.InformativeDialog;
 import com.google.android.material.tabs.TabLayout;
@@ -18,12 +13,13 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import static com.example.stegano.util.Helpers.isNull;
 
 public class EncoderActivity extends AppCompatActivity implements EncoderEventListener {
     private static final String TAG = "EncoderActivity";
@@ -95,7 +91,7 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     }
 
     private boolean hasSelectedImage() {
-        return selectedImage != null;
+        return !isNull(selectedImage);
     }
 
     private boolean hasMessage() {
@@ -164,23 +160,5 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
                 }
             });
         }
-    }
-
-    // Temporary test for library
-    private void testCryption(Bitmap bitmap) {
-        Log.d(TAG, "testCryption: Testing coders");
-
-        String string = "Testi1234";
-        Encoder encoder = new Encoder(new BufferedImage(bitmap));
-
-        BufferedImage encodedImage = encoder.encode(string.getBytes());
-
-        Bitmap enBitmap = encodedImage.getBitmap();
-
-        Decoder decoder = new Decoder(new BufferedImage(enBitmap));
-
-        byte[] decodedMessage = decoder.decode();
-
-        Log.d(TAG, "testCryption: Decoded:" + new String(decodedMessage));
     }
 }
