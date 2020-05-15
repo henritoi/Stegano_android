@@ -10,7 +10,7 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/sendDialogTitle"
+        android:id="@+id/alertTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sendDialogDescription"
+        android:id="@+id/alertDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

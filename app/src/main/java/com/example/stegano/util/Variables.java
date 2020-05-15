@@ -8,4 +8,5 @@ public class Variables {
     public static final String ENCODED_IMAGE_NAME = "ENCODED_IMAGE_NAME";
     public static final String IMAGES_FOLDER_NAME = "Stegano";
     public static final String DECODE_MESSAGE = "DECODE_MESSAGE";
+    public static final String HAS_SEND_IMAGE = "HAS_SEND_IMAGE";
 }

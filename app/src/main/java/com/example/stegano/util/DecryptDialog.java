@@ -10,22 +10,26 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.stegano.R;
+import com.example.stegano.decoder.DecodeSuccessActivity;
 import com.example.stegano.steganografia.crypters.CryptionType;
 
 public class DecryptDialog extends Dialog implements android.view.View.OnClickListener {
     private static final String TAG = "DecryptDialog";
 
-    public Activity activity;
+    public DecodeSuccessActivity activity;
     public Dialog dialog;
     public Button ok, cancel;
 
     private Spinner cryptionMethodSpinner;
     private LinearLayout aesCryptionOptions, caesarCryptionOptions;
+
+    private EditText aesSecretEditText, shiftKeyEditText;
 
     TextView infoTitle, infoDescription;
 
@@ -33,7 +37,7 @@ public class DecryptDialog extends Dialog implements android.view.View.OnClickLi
 
     public DecryptDialog(Activity activity) {
         super(activity);
-        this.activity = activity;
+        this.activity = (DecodeSuccessActivity) activity;
     }
 
     @Override
@@ -60,18 +64,74 @@ public class DecryptDialog extends Dialog implements android.view.View.OnClickLi
 
         aesCryptionOptions.setVisibility(View.GONE);
         caesarCryptionOptions.setVisibility(View.GONE);
+
+        aesSecretEditText = (EditText) findViewById(R.id.aesSecretEditText);
+        shiftKeyEditText = (EditText) findViewById(R.id.shiftKeyEditText);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.decryptDialogOkButton:
+                if(validateOptions()) {
+                    setSelectedOptions();
+                }
                 dismiss();
                 return;
             case R.id.decryptDialogCancelButton:
                 dismiss();
                 return;
         };
+    }
+
+    private boolean validateOptions() {
+        switch (cryptionMethodSpinner.getSelectedItem().toString()) {
+            case "None":
+                return true;
+            case "AES":
+                if(aesSecretEditText.getText().length() > 0) return true;
+            case "Caesar cipher":
+                if(Integer.parseInt(shiftKeyEditText.getText().toString()) >= 0) return true;
+        }
+        return false;
+    }
+
+
+    private void setSelectedOptions() {
+        switch (cryptionMethodSpinner.getSelectedItem().toString()) {
+            case "None":
+                this.activity.setCryptionOptions(
+                        CryptionType.NONE,
+                        null,
+                        0
+                );
+                this.activity.updateMessage();
+                break;
+            case "AES":
+                this.activity.setCryptionOptions(
+                        CryptionType.AES,
+                        aesSecretEditText.getText().toString(),
+                        0
+                );
+                this.activity.updateMessage();
+                break;
+            case "Caesar cipher":
+                this.activity.setCryptionOptions(
+                        CryptionType.CAESAR,
+                        null,
+                        Integer.parseInt(shiftKeyEditText.getText().toString())
+                );
+                this.activity.updateMessage();
+                break;
+            default:
+                this.activity.setCryptionOptions(
+                        CryptionType.NONE,
+                        aesSecretEditText.getText().toString(),
+                        Integer.parseInt(shiftKeyEditText.getText().toString())
+                );
+                this.activity.updateMessage();
+                break;
+        }
     }
 
     private AdapterView.OnItemSelectedListener decryptMethodChanged =

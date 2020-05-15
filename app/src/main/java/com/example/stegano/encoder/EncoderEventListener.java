@@ -15,4 +15,6 @@ public interface EncoderEventListener {
     public String getMessage();
 
     public void showError(String message);
+
+    public boolean hasSendImage();
 }

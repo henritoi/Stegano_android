@@ -10,6 +10,8 @@ public class MainApplication extends Application {
     private Bitmap bitmap;
     private String message;
 
+    private Bitmap sendBitmap;
+
     /**
      * Set bitmap
      */
@@ -61,5 +63,25 @@ public class MainApplication extends Application {
     public void clear() {
         clearBitmap();
         clearMessage();
+        clearSendBitmap();
+    }
+
+    public void clearSendBitmap() {
+        this.sendBitmap = null;
+    }
+
+    /**
+     * Set bitmap
+     */
+    public void setSendBitmap(Bitmap bitmap) {
+        this.sendBitmap = bitmap;
+    }
+
+    /**
+     * Get bitmap that is set
+     * @return Bitmap bitmap
+     */
+    public Bitmap getSendBitmap() {
+        return this.sendBitmap;
     }
 }

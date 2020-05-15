@@ -11,4 +11,6 @@ public interface DecoderEventListener {
     public void showError(String message);
 
     public void noMessageFound();
+
+    public boolean hasSendImage();
 }

@@ -1,5 +1,6 @@
 package com.example.stegano.encoder;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import com.example.stegano.R;
 import com.example.stegano.util.CustomDialog;
 import com.example.stegano.util.InformativeDialog;
+import com.example.stegano.util.Variables;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +36,17 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
     private CustomDialog cancelDialog;
     private InformativeDialog errorDialog;
 
+    private boolean hasSendImage = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if has send image
+        Intent intent = getIntent();
+        if(intent.hasExtra(Variables.HAS_SEND_IMAGE)
+                && intent.getBooleanExtra(Variables.HAS_SEND_IMAGE, false)) {
+            this.hasSendImage = intent.getBooleanExtra(Variables.HAS_SEND_IMAGE, false);
+        }
 
         // Hide status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -141,6 +151,11 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
 
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         errorDialog.show();
+    }
+
+    @Override
+    public boolean hasSendImage() {
+        return this.hasSendImage;
     }
 
     @Override

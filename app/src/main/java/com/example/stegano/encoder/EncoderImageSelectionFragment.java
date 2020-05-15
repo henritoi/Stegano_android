@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.stegano.MainApplication;
 import com.example.stegano.R;
 import com.example.stegano.encoder.EncoderEventListener;
 
@@ -51,6 +52,8 @@ public class EncoderImageSelectionFragment extends Fragment {
 
     private LinearLayout imageSelectionButtonsLinearLayout;
     private LinearLayout imageSelectedButtonsLinearLayout;
+
+    private MainApplication application;
 
     public EncoderImageSelectionFragment() {
         //
@@ -91,6 +94,23 @@ public class EncoderImageSelectionFragment extends Fragment {
         useCameraButton.setOnClickListener(handleButtonClick);
         changeImageButton.setOnClickListener(handleButtonClick);
         continueButton.setOnClickListener(handleButtonClick);
+
+        application = ((MainApplication) getActivity().getApplicationContext());
+
+        if(listener.hasSendImage()) {
+            Bitmap bitmap = application.getSendBitmap();
+            if(!isNull(bitmap)) {
+                previewImageView.setImageBitmap(bitmap);
+
+                isImageSelected = true;
+                listener.setSelectedImage(bitmap);
+
+                imageSelectionButtonsLinearLayout.setVisibility(View.GONE);
+                imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+            }
+        }
+        // Clear application send image
+        application.clearSendBitmap();
 
         return view;
     }

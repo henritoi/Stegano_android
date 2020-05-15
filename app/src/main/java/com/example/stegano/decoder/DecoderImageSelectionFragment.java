@@ -98,6 +98,22 @@ public class DecoderImageSelectionFragment extends Fragment {
 
         application = ((MainApplication) getActivity().getApplicationContext());
 
+        if(listener.hasSendImage()) {
+            Bitmap bitmap = application.getSendBitmap();
+            if(!isNull(bitmap)) {
+                previewImageView.setImageBitmap(bitmap);
+
+                isImageSelected = true;
+                listener.setSelectedImage(bitmap);
+
+                existingImageButton.setVisibility(View.GONE);
+                imageSelectedButtonsLinearLayout.setVisibility(View.VISIBLE);
+            }
+        }
+
+        // Clear application send image
+        application.clearSendBitmap();
+
         return view;
     }
 

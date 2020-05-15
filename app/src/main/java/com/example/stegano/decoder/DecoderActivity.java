@@ -3,6 +3,7 @@ package com.example.stegano.decoder;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import com.example.stegano.R;
 import com.example.stegano.util.CustomDialog;
 import com.example.stegano.util.InformativeDialog;
+import com.example.stegano.util.Variables;
 
 import static com.example.stegano.util.Helpers.isNull;
 
@@ -24,12 +26,20 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
 
     private CustomDialog cancelDialog;
     private InformativeDialog errorDialog;
+    private boolean hasSendImage = false;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if has send image
+        Intent intent = getIntent();
+        if(intent.hasExtra(Variables.HAS_SEND_IMAGE)
+                && intent.getBooleanExtra(Variables.HAS_SEND_IMAGE, false)) {
+            this.hasSendImage = intent.getBooleanExtra(Variables.HAS_SEND_IMAGE, false);
+        }
+
         setContentView(R.layout.activity_decoder);
 
         // Hide status bar
@@ -45,6 +55,7 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         cancelDialog = new CustomDialog(this);
         errorDialog = new InformativeDialog(this);
 
+        Log.d(TAG, "onCreate: " + hasSendImage);
     }
 
     @Override
@@ -108,4 +119,8 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         errorDialog.show();
     }
 
+    @Override
+    public boolean hasSendImage() {
+        return this.hasSendImage;
+    }
 }
