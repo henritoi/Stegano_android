@@ -6,14 +6,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.stegano.decoder.DecoderActivity;
 import com.example.stegano.encoder.EncoderActivity;
+import com.example.stegano.onboarding.OnboardingActivity;
+import com.example.stegano.util.Helpers;
 import com.example.stegano.util.SendDialog;
+import com.example.stegano.util.Variables;
 
 import static com.example.stegano.util.Helpers.decodeUriToBitmap;
 import static com.example.stegano.util.Helpers.isNull;
@@ -23,10 +27,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     private Button encoderButton;
     private Button decoderButton;
+    private ImageView infoImageView;
 
     private SendDialog sendDialog;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,12 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         encoderButton = (Button) findViewById(R.id.encoderButton);
         decoderButton = (Button) findViewById(R.id.decoderButton);
+        infoImageView = (ImageView) findViewById(R.id.infoImageView);
 
-        encoderButton.setOnClickListener(methodButtonListener);
-        decoderButton.setOnClickListener(methodButtonListener);
+        encoderButton.setOnClickListener(clickListener);
+        decoderButton.setOnClickListener(clickListener);
+
+        infoImageView.setOnClickListener(clickListener);
 
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -51,7 +57,25 @@ public class DashboardActivity extends AppCompatActivity {
             if(type.startsWith("image/")) {
                 handleSendImage(intent);
             }
+        }else {
+            boolean isOnboardingShown = Boolean.parseBoolean(Helpers.readSharedSetting(
+                    DashboardActivity.this,
+                    Variables.PREF_ONBOARDING_SHOWN,
+                    "false"));
+            if(!isOnboardingShown) {
+                Helpers.saveSharedSetting(
+                        DashboardActivity.this,
+                        Variables.PREF_ONBOARDING_SHOWN,
+                        "true");
+                openOnboarding();
+            }
         }
+    }
+
+    private void openOnboarding() {
+        Intent intent = new Intent(DashboardActivity.this, OnboardingActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
     }
 
     private void handleSendImage(Intent intent) {
@@ -70,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    private View.OnClickListener methodButtonListener = new View.OnClickListener() {
+    private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent;
@@ -84,6 +108,9 @@ public class DashboardActivity extends AppCompatActivity {
                     intent = new Intent(DashboardActivity.this, DecoderActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
+                    return;
+                case R.id.infoImageView:
+                    openOnboarding();
                     return;
                 default:
                     return;

@@ -1,0 +1,103 @@
+<resources>
+    <string name="app_name">Stegano</string>
+    <string name="title_encoder">Enkooderi</string>
+    <string name="title_decoder">Koodinpurkaja</string>
+    <string name="title_activity_encoder">EncoderActivity</string>
+
+    <string name="title_step_1">Vaihe 1</string>
+    <string name="title_step_2">Vaihe 2</string>
+    <string name="title_step_3">Vaihe 3</string>
+
+    <string name="step_continue">Jatka</string>
+
+    <string name="title_encoder_image_selection_fragment">Valitse kuva</string>
+    <string name="encoder_image_selection_description">Valitse kuva galleriasta tai käytä kameraa</string>
+    <string name="encoder_image_selection_button_gallery">Galleria</string>
+    <string name="encoder_image_selection_button_camera">Kamera</string>
+    <string name="encoder_image_selection_button_change_image">Vaihda kuva</string>
+
+    <string name="title_encoder_message_fragment">Viesti</string>
+    <string name="encoder_message_textarea_hint">Kirjoita piilotettava viesti</string>
+    <string name="encoder_message_description">Kirjoita kuvaan piilotettava viesti</string>
+
+    <string name="title_encoder_cryption_fragment">Salaus</string>
+    <string name="encoder_cryption_description">Valitse kuinka haluat viestin olevan salattu</string>
+    <string name="encoder_cryption_use_cryption_switch">Käytä salausta</string>
+
+    <string name="encryption_method">Salausmenetelmä</string>
+    <string name="cryption_none">Ei salausta</string>
+    <string name="cryption_aes">AES</string>
+    <string name="cryption_aes_secret">Salainen avain</string>
+    <string name="cryption_aes_guide">Avainta käytetään niin salaamisessa kuin salauksen purussakin</string>
+    <string name="cryption_caesar_cipher">Caesarin salakirjoitus</string>
+    <string name="cryption_caesar_cipher_guide">Valitse kuinka paljon aakkostoa siirretään</string>
+    <string name="cryption_caesar_cipher_shift_key">Siirtoavain</string>
+
+    <string name="encoding_success_title">Salaus onnistui!</string>
+    <string name="encoding_success_description">Salattu kuva on tallennettu onnistuneesti</string>
+    <string name="encoding_success_share_button">Jaa</string>
+    <string name="encoding_success_done_button">Valmis</string>
+    <string name="encode_success_share_image">Jaa kuva</string>
+
+    <string name="encode_error_title">Virhe on tapahtunut</string>
+    <string name="encode_error_image_selection">Virhe tapahtui kuvaa haettaessa.</string>
+    <string name="encode_error_message_encryption">Virhe tapahtui kuvaa salattaessa.</string>
+    <string name="encode_error_get_message">Virhe tapahtui viestiä hakiessa.</string>
+    <string name="encode_error_image_encode">Virhe tapahtui viestin piilottamisessa kuvaan.</string>
+    <string name="encode_error_image_save">Virhe tapahtui kuvaa tallennettaessa.</string>
+    <string name="encode_error_write_permission_required">Sovellus tarvitsee kirjoitusoikeuden toimiakseen kunnolla.</string>
+
+    <string name="decoder_scan">Skannaa</string>
+    <string name="decoder_pick_image">Valise kuva</string>
+    <string name="decoder_image_selection_button_gallery">Valise kuva</string>
+    <string name="decoder_image_selection_description">Valise haluamasi kuva skannattavaksi</string>
+
+    <string name="decoding_success_title">Purku onnistui!</string>
+    <string name="decoding_success_description">Löydetty viesti:</string>
+    <string name="decoding_success_decrypt_button">Pura salaus</string>
+    <string name="decoding_success_done_button">Valmis</string>
+
+    <string name="decode_error_title">Virhe tapahtunut</string>
+    <string name="decode_error_image_not_selected">Virhe tapahtui kuvaa haettaessa.</string>
+    <string name="decode_error_title_no_message_found">Viestiä ei löytynyt</string>
+    <string name="decode_error_no_message_found">Valitsemastasi kuvasta ei löytynyt viestiä. Kokeile toista kuvaa.</string>
+
+
+    <string name="cancel_alert_title">Peruutus</string>
+    <string name="cancel_alert_description">Oletko varma, että haluat peruuttaa käsittelyn?</string>
+    <string name="alert_yes">Kyllä</string>
+    <string name="alert_no">Peruuta</string>
+
+    <string name="error_title_default">Virhe</string>
+    <string name="error_description_default">Virhe tapahtunut</string>
+    <string name="error_ok_default">OK</string>
+
+    <string name="camera_permission_explanation">Sovellus vaatii oikeuden käyttää kameraa</string>
+    <string name="loading_title">Skannaa...</string>
+
+    <string name="decrypt_dialog_title">Purkuvaihtoehdot</string>
+    <string name="decrypt_dialog_description">Valitse purkumenetelmä</string>
+    <string name="decrypt_dialog_ok_button">Pura</string>
+    <string name="decrypt_dialog_cancel_button">Peruuta</string>
+
+    <string name="default_empty"> </string>
+
+    <string name="send_dialog_title">Valitse menetelmä</string>
+    <string name="send_dialog_encode">Salaus</string>
+    <string name="send_dialog_decode">Purku</string>
+    <string name="send_dialog_description">Haluatko salata vai purkaa viestin valitsemastasi kuvasta.</string>
+
+    <string name="custom_spinner_select_dialog_title">Valitse</string>
+
+    <string name="onboarding_skip_button">Skippaa</string>
+    <string name="onboarding_next_button">Seuraava</string>
+    <string name="onboarding_continue_button">Aloita sovelluksen käyttö</string>
+
+    <string name="onboarding_first_title">Pääse alkuun</string>
+    <string name="onboarding_second_title">Piilotettuja viestejä</string>
+    <string name="onboarding_third_title">Jaa kavereille</string>
+
+    <string name="onboarding_first_content">Valitse haluatko piilottaa viestin kuvaan vai tarkastaa onko jossain kuvassasi piilotettu viesti</string>
+    <string name="onboarding_second_content">Voit joko piilottaa salatun viestin kuvaan tai lukea salatun viestin kuvasta</string>
+    <string name="onboarding_third_content">Jaa piilotetut viestit kavereidesi kanssa!</string>
+</resources>

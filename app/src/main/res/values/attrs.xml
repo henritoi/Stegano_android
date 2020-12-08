@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSpinner">
+        <attr name="android:entries" />
+        <attr name="defaultValue" format="integer" />
+    </declare-styleable>
+</resources>

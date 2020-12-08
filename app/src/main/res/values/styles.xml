@@ -39,4 +39,31 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
     </style>
+
+    <style name="SelectionDialogItem">
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingVertical">15dp</item>
+    </style>
+
+    <style name="SelectionDialogItem.Selected" parent="SelectionDialogItem">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorBackgroundSecondary</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
 </resources>

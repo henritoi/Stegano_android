@@ -1,5 +1,7 @@
 package com.example.stegano.encoder;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,6 +12,7 @@ import com.example.stegano.encoder.EncoderImageSelectionFragment;
 import com.example.stegano.encoder.EncoderMessageFragment;
 
 public class EncoderViewPagerAdapter extends FragmentPagerAdapter {
+    private static final String TAG = "EncoderViewPagerAdapter";
 
     public EncoderViewPagerAdapter(FragmentManager supportFragmentManager) {
         super(supportFragmentManager);

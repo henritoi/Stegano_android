@@ -69,13 +69,13 @@
             android:textAlignment="center"
             android:textSize="18sp" />
 
-        <Spinner
+        <com.example.stegano.util.CustomSpinner
             android:id="@+id/encryptionTypeSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/encryption_types"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:spinnerMode="dialog" />
+            android:entries="@array/encryption_types"
+            app:defaultValue="0"/>
 
         <LinearLayout
             android:id="@+id/aesEncryptionLinearLayout"
@@ -87,7 +87,7 @@
                 android:id="@+id/aesSecretTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="@android:color/white"
+                android:theme="@style/TextInputLayoutAppearance"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true">
 
@@ -115,7 +115,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="@android:color/white"
+                android:theme="@style/TextInputLayoutAppearance"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true">
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/cryption_caesar_cipher_shift_key"
                     android:inputType="numberSigned"
-                    android:maxLength="3"/>
+                    android:maxLength="3" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

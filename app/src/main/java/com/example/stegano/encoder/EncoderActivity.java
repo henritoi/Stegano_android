@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,7 +69,7 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         encoderTabDots = findViewById(R.id.encoderTabDots);
         encoderTabDots.setupWithViewPager(encoderViewPager, true);
 
-        disableTabDotClicks();
+        //disableTabDotClicks();
 
         cancelDialog = new CustomDialog(this);
         errorDialog = new InformativeDialog(this);

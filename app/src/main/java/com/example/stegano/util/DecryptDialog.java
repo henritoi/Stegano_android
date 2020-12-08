@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -67,6 +69,11 @@ public class DecryptDialog extends Dialog implements android.view.View.OnClickLi
 
         aesSecretEditText = (EditText) findViewById(R.id.aesSecretEditText);
         shiftKeyEditText = (EditText) findViewById(R.id.shiftKeyEditText);
+
+        aesSecretEditText.addTextChangedListener(textChangedListener);
+        shiftKeyEditText.addTextChangedListener(textChangedListener);
+
+
     }
 
     @Override
@@ -158,6 +165,23 @@ public class DecryptDialog extends Dialog implements android.view.View.OnClickLi
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    private TextWatcher textChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
 
         }
     };

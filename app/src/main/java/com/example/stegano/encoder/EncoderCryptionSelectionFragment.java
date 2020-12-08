@@ -40,6 +40,7 @@ import com.example.stegano.steganografia.crypters.CryptionType;
 import com.example.stegano.steganografia.crypters.other.CaesarCipher;
 import com.example.stegano.steganografia.crypters.symmetric.AES;
 import com.example.stegano.steganografia.image.BufferedImage;
+import com.example.stegano.util.CustomSpinner;
 import com.example.stegano.util.Variables;
 
 import java.io.File;
@@ -64,7 +65,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
 
     Button generateButton;
     Switch useEncryptionSwitch;
-    Spinner encryptionTypeSpinner;
+    CustomSpinner encryptionTypeSpinner;
     EditText aesSecretEditText;
     EditText caesarCipherEditText;
     LinearLayout encryptionTypesLinearLayout;
@@ -108,7 +109,7 @@ public class EncoderCryptionSelectionFragment extends Fragment {
 
         caesarCipherLinearLayout.setVisibility(View.GONE);
 
-        encryptionTypeSpinner.setOnItemSelectedListener(typeChanged);
+        encryptionTypeSpinner.setOnItemSelectionChangedListener(typeChanged);
 
         encryptionTypesLinearLayout = view.findViewById(R.id.encryptionTypesLinearLayout);
         encryptionTypesLinearLayout.setVisibility(View.GONE);
@@ -272,12 +273,11 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         return null;
     }
 
-    private AdapterView.OnItemSelectedListener typeChanged = new AdapterView.OnItemSelectedListener() {
+    private CustomSpinner.OnItemSelectionChangedListener typeChanged
+            = new CustomSpinner.OnItemSelectionChangedListener() {
 
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.d(TAG, "onItemSelected: " + view.getId());
-            // TODO: Spinner selected -> change inputs -> inform listener
+        public void selectionChanged(CustomSpinner parent, int position) {
             switch (parent.getItemAtPosition(position).toString()) {
                 case "AES":
                     cryptionType = CryptionType.AES;
@@ -298,10 +298,6 @@ public class EncoderCryptionSelectionFragment extends Fragment {
             }
         }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
     };
 
     private CryptionType getSelectedCryptionType() {

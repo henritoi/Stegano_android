@@ -86,4 +86,18 @@
     <string name="send_dialog_encode">Encode</string>
     <string name="send_dialog_decode">Decode</string>
     <string name="send_dialog_description">Would you like to encode or decode the selected image?</string>
+
+    <string name="custom_spinner_select_dialog_title">Please select</string>
+
+    <string name="onboarding_skip_button">Skip</string>
+    <string name="onboarding_next_button">Next</string>
+    <string name="onboarding_continue_button">Start using the app</string>
+
+    <string name="onboarding_first_title">Get started</string>
+    <string name="onboarding_second_title">Hidden messages</string>
+    <string name="onboarding_third_title">Share with friends</string>
+
+    <string name="onboarding_first_content">Select whether you would like to hide message to image or check if existing image contains a hidden message.</string>
+    <string name="onboarding_second_content">You can either hide encrypted messages or decrypt existing messages from images.</string>
+    <string name="onboarding_third_content">Share hidden messages with your friends!</string>
 </resources>
