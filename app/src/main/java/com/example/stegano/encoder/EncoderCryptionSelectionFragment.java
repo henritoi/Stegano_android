@@ -41,6 +41,7 @@ import com.example.stegano.steganografia.crypters.other.CaesarCipher;
 import com.example.stegano.steganografia.crypters.symmetric.AES;
 import com.example.stegano.steganografia.image.BufferedImage;
 import com.example.stegano.util.CustomSpinner;
+import com.example.stegano.util.InformativeDialog;
 import com.example.stegano.util.Variables;
 
 import java.io.File;

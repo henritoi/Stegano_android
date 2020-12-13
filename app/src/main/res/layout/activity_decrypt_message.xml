@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".encoder.EncoderCryptionSelectionFragment"
+    android:background="@drawable/background_gradient"
     android:id="@+id/encoderCryptionFragment">
 
 
@@ -12,73 +13,44 @@
         android:id="@+id/stepTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/title_step_3"
+        android:layout_marginTop="16dp"
+        android:text="@string/decode_decrypt_message_title"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/encryptionDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:text="@string/encoder_cryption_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepTitleTextView" />
-
-    <Switch
-        android:id="@+id/useEncryptionSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_weight="1"
-        android:text="@string/encoder_cryption_use_cryption_switch"
-        android:textColor="@color/colorText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/encryptionDescriptionTextView" />
-
     <LinearLayout
-        android:id="@+id/encryptionTypesLinearLayout"
+        android:id="@+id/decryptionTypesLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/generateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/useEncryptionSwitch">
+        app:layout_constraintTop_toBottomOf="@+id/stepTitleTextView">
 
         <TextView
-            android:id="@+id/ecryptionMethodTitle"
+            android:id="@+id/decryptionMethodTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:text="@string/encryption_method"
+            android:text="@string/decryption_method"
             android:textAlignment="center"
             android:textSize="18sp" />
 
         <com.example.stegano.util.CustomSpinner
-            android:id="@+id/encryptionTypeSpinner"
+            android:id="@+id/decryptionTypeSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/fab_margin"
             android:entries="@array/encryption_types"
-            app:defaultValue="0"/>
+            app:defaultValue="0" />
 
         <LinearLayout
-            android:id="@+id/aesEncryptionLinearLayout"
+            android:id="@+id/aesDecryptionLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -103,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:text="@string/cryption_aes_guide"/>
+                android:text="@string/decryption_aes_guide" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,22 +104,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:text="@string/cryption_caesar_cipher_guide"/>
+                android:text="@string/cryption_caesar_cipher_guide" />
         </LinearLayout>
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/decryptedMessageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/decrypted_message_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decryptionTypesLinearLayout" />
+
+    <TextView
+        android:id="@+id/decryptedMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/decryptedMessageLabel" />
+
     <Button
-        android:id="@+id/generateButton"
+        android:id="@+id/done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_selector"
-        android:text="@string/generate"
+        android:text="@string/decoding_success_done_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

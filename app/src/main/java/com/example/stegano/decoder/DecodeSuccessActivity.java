@@ -2,6 +2,7 @@ package com.example.stegano.decoder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -9,31 +10,19 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.stegano.DashboardActivity;
 import com.example.stegano.MainApplication;
 import com.example.stegano.R;
-import com.example.stegano.steganografia.crypters.CryptionType;
-import com.example.stegano.steganografia.crypters.other.CaesarCipher;
-import com.example.stegano.steganografia.crypters.symmetric.AES;
-import com.example.stegano.util.DecryptDialog;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 
 import static com.example.stegano.util.Helpers.isNull;
 
 public class DecodeSuccessActivity extends AppCompatActivity {
+    private static final String TAG = "DecodeSuccessActivity";
 
     private TextView decodedMessageTextView;
     private Button decodeDoneButton;
     private Button decryptMessageButton;
     private String decodedMessage; // Original message
-    private String decryptedMessage; // Decrypted message
-
-    private CryptionType selectedCryptionType = CryptionType.NONE;
-    private String aesSecret = "";
-    private int shiftKey = 0;
-
-    private DecryptDialog decryptDialog;
 
     private MainApplication application;
 
@@ -60,12 +49,10 @@ public class DecodeSuccessActivity extends AppCompatActivity {
         decodedMessage = application.getMessage();
 
         if(isNull(decodedMessage) || decodedMessage.length() < 1) {
-            // TODO: Show error and go back!
+            // Show error and go back!
         }
 
         decodedMessageTextView.setText(decodedMessage);
-
-        decryptDialog = new DecryptDialog(this);
     }
 
     private View.OnClickListener handleButtonClick = new View.OnClickListener() {
@@ -73,7 +60,9 @@ public class DecodeSuccessActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.decryptMessageButton:
-                    decryptDialog.show();
+                    Intent intent = new Intent(DecodeSuccessActivity.this, DecryptMessageActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
                     return;
                 case R.id.decodeDoneButton:
                     application.clearMessage();
@@ -87,48 +76,6 @@ public class DecodeSuccessActivity extends AppCompatActivity {
     public void onBackPressed() {
         application.clearMessage();
         finish();
-    }
-
-    public CryptionType getSelectedCryptionType() {
-        return this.selectedCryptionType;
-    }
-
-    public String getAesSecret() {
-        return this.aesSecret;
-    }
-
-    public int getShiftKey() {
-        return this.shiftKey;
-    }
-
-    public void updateMessage() {
-        switch(this.selectedCryptionType) {
-            case NONE:
-                this.decodedMessageTextView.setText(this.decodedMessage);
-                this.decryptedMessage = null;
-                break;
-            case AES:
-                try {
-                    AES aes = new AES(this.aesSecret);
-                    this.decryptedMessage = aes.decrypt(this.decodedMessage);
-                    decodedMessageTextView.setText(this.decryptedMessage);
-                } catch (Exception e) {
-                    this.decodedMessageTextView.setText(this.decodedMessage);
-                    // TODO: show error
-                }
-                break;
-            case CAESAR:
-                CaesarCipher caesarCipher = new CaesarCipher(this.shiftKey);
-                this.decryptedMessage = caesarCipher.decrypt(this.decodedMessage);
-                decodedMessageTextView.setText(this.decryptedMessage);
-                break;
-        }
-    }
-
-    public void setCryptionOptions(CryptionType cryptionType, String secret, int shiftKey) {
-        this.selectedCryptionType = cryptionType;
-        this.aesSecret = secret;
-        this.shiftKey = shiftKey;
     }
 
 }

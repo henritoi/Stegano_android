@@ -25,10 +25,12 @@
     <string name="encoder_cryption_use_cryption_switch">Käytä salausta</string>
 
     <string name="encryption_method">Salausmenetelmä</string>
+    <string name="decryption_method">Salauksen purkumenetelmä</string>
     <string name="cryption_none">Ei salausta</string>
     <string name="cryption_aes">AES</string>
     <string name="cryption_aes_secret">Salainen avain</string>
     <string name="cryption_aes_guide">Avainta käytetään niin salaamisessa kuin salauksen purussakin</string>
+    <string name="decryption_aes_guide">Avain, jota käytetään salauksen purkamiseen</string>
     <string name="cryption_caesar_cipher">Caesarin salakirjoitus</string>
     <string name="cryption_caesar_cipher_guide">Valitse kuinka paljon aakkostoa siirretään</string>
     <string name="cryption_caesar_cipher_shift_key">Siirtoavain</string>
@@ -100,4 +102,10 @@
     <string name="onboarding_first_content">Valitse haluatko piilottaa viestin kuvaan vai tarkastaa onko jossain kuvassasi piilotettu viesti</string>
     <string name="onboarding_second_content">Voit joko piilottaa salatun viestin kuvaan tai lukea salatun viestin kuvasta</string>
     <string name="onboarding_third_content">Jaa piilotetut viestit kavereidesi kanssa!</string>
+
+    <string name="decrypt_message_info">Pura viestin salaus mikäli viesti on salattu</string>
+    <string name="decode_decrypt_message_title">Pura salaus</string>
+    <string name="decoder_decryption_description">Valitse salauksen purun menetelmä</string>
+    <string name="generate">Generoi</string>
+    <string name="decrypted_message_label">Purettu viesti:</string>
 </resources>

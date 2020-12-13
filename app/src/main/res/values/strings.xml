@@ -25,10 +25,12 @@
     <string name="encoder_cryption_use_cryption_switch">Use encryption</string>
 
     <string name="encryption_method">Encryption method</string>
+    <string name="decryption_method">Decryption method</string>
     <string name="cryption_none">None</string>
     <string name="cryption_aes">AES</string>
     <string name="cryption_aes_secret">Secret</string>
     <string name="cryption_aes_guide">Secret will be used for both encryption and decryption of the message</string>
+    <string name="decryption_aes_guide">Secret will be used in decryption of the message</string>
     <string name="cryption_caesar_cipher">Caesar cipher</string>
     <string name="cryption_caesar_cipher_guide">Select how much alphabets are shifted</string>
     <string name="cryption_caesar_cipher_shift_key">Shift key</string>
@@ -100,4 +102,11 @@
     <string name="onboarding_first_content">Select whether you would like to hide message to image or check if existing image contains a hidden message.</string>
     <string name="onboarding_second_content">You can either hide encrypted messages or decrypt existing messages from images.</string>
     <string name="onboarding_third_content">Share hidden messages with your friends!</string>
+
+    <string name="decrypt_message_info">Decrypt message if it\'s encrypted</string>
+    <string name="decode_decrypt_message_title">Decrypt message</string>
+    <string name="decoder_decryption_description">Select decryption method</string>
+    <string name="generate">Generate</string>
+
+    <string name="decrypted_message_label">Decrypted message:</string>
 </resources>
