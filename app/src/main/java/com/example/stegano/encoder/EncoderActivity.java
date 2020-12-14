@@ -24,6 +24,9 @@ import android.widget.LinearLayout;
 
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Main Encoder activity
+ */
 public class EncoderActivity extends AppCompatActivity implements EncoderEventListener {
     private static final String TAG = "EncoderActivity";
 
@@ -39,6 +42,10 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
 
     private boolean hasSendImage = false;
 
+    /**
+     * Encoder activity onCreate: Initialize activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +76,17 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         encoderTabDots = findViewById(R.id.encoderTabDots);
         encoderTabDots.setupWithViewPager(encoderViewPager, true);
 
-        //disableTabDotClicks();
+        disableTabDotClicks();
 
         cancelDialog = new CustomDialog(this);
         errorDialog = new InformativeDialog(this);
     }
 
+    /**
+     * Handle back button press
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -83,6 +95,9 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Handle hw back button pressed
+     */
     @Override
     public void onBackPressed() {
         handleBackPressed();
@@ -101,24 +116,41 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         }
     }
 
+    /**
+     * Check if has selected image
+     * @return Boolean hasSelectedImage
+     */
     private boolean hasSelectedImage() {
         return !isNull(selectedImage);
     }
 
+    /**
+     * Check if has given message
+     * @return Boolean hasMessage
+     */
     private boolean hasMessage() {
         return message.length() > 0;
     }
 
+    /**
+     * Show cancel dialog
+     */
     private void showCancelDialog() {
         cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cancelDialog.show();
     }
 
+    /**
+     * Go to next page on encoder acvity
+     */
     @Override
     public void nextPage() {
         encoderViewPager.setCurrentItem(encoderViewPager.getCurrentItem() + 1);
     }
 
+    /**
+     * Go to previous page on encoder activity
+     */
     @Override
     public void previousPage() {
         if(encoderViewPager.getCurrentItem() > 0) {
@@ -126,25 +158,45 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         }
     }
 
+    /**
+     * Check if has previous page
+     * @return Boolean hasPreviousPage
+     */
     private boolean hasPreviousPage() {
         return encoderViewPager.getCurrentItem() > 0;
     }
 
+    /**
+     * Setter for selectedImage
+     * @param image
+     */
     @Override
     public void setSelectedImage(Bitmap image) {
         selectedImage = image;
     }
 
+    /**
+     * Setter for message
+     * @param message
+     */
     @Override
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Getter for message
+     * @return String message
+     */
     @Override
     public String getMessage() {
         return this.message;
     }
 
+    /**
+     * Show error dialog
+     * @param message
+     */
     @Override
     public void showError(String message) {
         errorDialog.setDialogTitle(getString(R.string.encode_error_title));
@@ -154,16 +206,27 @@ public class EncoderActivity extends AppCompatActivity implements EncoderEventLi
         errorDialog.show();
     }
 
+    /**
+     * Check if has sendImage
+     * @return Boolean hasSendImage
+     */
     @Override
     public boolean hasSendImage() {
         return this.hasSendImage;
     }
 
+    /**
+     * Getter for selectedImage
+     * @return
+     */
     @Override
     public Bitmap getSelectedImage() {
         return selectedImage;
     }
 
+    /**
+     * Disable Encoder pager page selection from dots
+     */
     private void disableTabDotClicks() {
         encoderTabDots.clearOnTabSelectedListeners();
 

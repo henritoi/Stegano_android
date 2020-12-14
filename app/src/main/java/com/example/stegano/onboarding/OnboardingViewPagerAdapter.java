@@ -7,13 +7,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+/**
+ * Onboarding View Pager Adapter
+ */
 public class OnboardingViewPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "OnboardingViewPagerAdap";
 
+    /**
+     * Required contructor
+     * @param supportFragmentManager
+     */
     public OnboardingViewPagerAdapter(FragmentManager supportFragmentManager) {
         super(supportFragmentManager);
     }
 
+    /**
+     * Initialize view pager pages
+     * @param position
+     * @return
+     */
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -29,6 +41,10 @@ public class OnboardingViewPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    /**
+     * Initialize page count for view pager
+     * @return int
+     */
     @Override
     public int getCount() {
         return 3;

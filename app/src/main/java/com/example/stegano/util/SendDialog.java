@@ -31,6 +31,9 @@ import javax.security.auth.login.LoginException;
 import static com.example.stegano.util.Helpers.decodeUriToBitmap;
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Dialog to handle shares from outside of the application
+ */
 public class SendDialog extends Dialog implements android.view.View.OnClickListener {
     private static final String TAG = "SendDialog";
 
@@ -44,11 +47,19 @@ public class SendDialog extends Dialog implements android.view.View.OnClickListe
 
     TextView infoTitle, infoDescription;
 
+    /**
+     * Dialog constructor
+     * @param activity
+     */
     public SendDialog(Activity activity) {
         super(activity);
         this.activity = activity;
     }
 
+    /**
+     * Initialize dialog components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +84,10 @@ public class SendDialog extends Dialog implements android.view.View.OnClickListe
         }
     }
 
+    /**
+     * Handle click events inside the dialog
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -87,6 +102,9 @@ public class SendDialog extends Dialog implements android.view.View.OnClickListe
         };
     }
 
+    /**
+     * Handle encode button click and set image as parameter
+     */
     private void handleEncodeButtonClick() {
         // Set image as global
         application.setSendBitmap(this.previewBitmap);
@@ -98,6 +116,9 @@ public class SendDialog extends Dialog implements android.view.View.OnClickListe
         return;
     }
 
+    /**
+     * Handle decode button click and set image as parameter
+     */
     private void handleDecodeButtonClick() {
         // Set image as global
         application.setSendBitmap(this.previewBitmap);
@@ -109,6 +130,10 @@ public class SendDialog extends Dialog implements android.view.View.OnClickListe
         return;
     }
 
+    /**
+     * Set shared image as preview to the dialog
+     * @param bitmap
+     */
     public void setImagePreview(Bitmap bitmap) {
         previewBitmap = bitmap;
     }

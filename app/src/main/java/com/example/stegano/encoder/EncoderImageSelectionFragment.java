@@ -30,7 +30,7 @@ import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Encoder: Image selection fragment
  */
 public class EncoderImageSelectionFragment extends Fragment {
     private static final String TAG = "EncoderImageSelectionFr";
@@ -55,10 +55,17 @@ public class EncoderImageSelectionFragment extends Fragment {
 
     private MainApplication application;
 
+    /**
+     * Required empty constructor
+     */
     public EncoderImageSelectionFragment() {
         //
     }
 
+    /**
+     * Initialize listener
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity)
     {
@@ -70,6 +77,13 @@ public class EncoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Encoder image selection initialization
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -115,6 +129,9 @@ public class EncoderImageSelectionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Handle button click inside the fragment
+     */
     private View.OnClickListener handleButtonClick = new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -139,6 +156,9 @@ public class EncoderImageSelectionFragment extends Fragment {
       }
     };
 
+    /**
+     * Handle the selection of image from local storage
+     */
     private void pickExistingImage() {
         if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -152,6 +172,9 @@ public class EncoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Use camera to take picture
+     */
     private void useCamera() {
         if(getContext().checkSelfPermission(Manifest.permission.CAMERA) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -164,6 +187,9 @@ public class EncoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Reset image selection
+     */
     private void removeImageSelection() {
         isImageSelected = false;
         listener.setSelectedImage(null);
@@ -173,6 +199,12 @@ public class EncoderImageSelectionFragment extends Fragment {
         imageSelectedButtonsLinearLayout.setVisibility(View.GONE);
     }
 
+    /**
+     * Handle camera use
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -227,6 +259,12 @@ public class EncoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Check for permissions to use camera
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -238,7 +276,7 @@ public class EncoderImageSelectionFragment extends Fragment {
                     // permission was granted, yay! Do the
                     useCamera();
                 }else {
-                    // TODO: Notify user that app requires camera permission
+                    // Notify user that app requires camera permission
                 }
                 return;
             case READ_EXTERNAL_PERMISSION_REQUEST_CODE:
@@ -248,7 +286,7 @@ public class EncoderImageSelectionFragment extends Fragment {
                     // permission was granted, yay! Do the
                     pickExistingImage();
                 }else {
-                    // TODO: Notify user that app requires read external permission
+                    // Notify user that app requires read external permission
                 }
                 return;
         }

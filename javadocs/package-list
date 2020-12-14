@@ -1,0 +1,12 @@
+com.example.stegano
+com.example.stegano.decoder
+com.example.stegano.encoder
+com.example.stegano.onboarding
+com.example.stegano.steganografia.coders
+com.example.stegano.steganografia.crypters
+com.example.stegano.steganografia.crypters.other
+com.example.stegano.steganografia.crypters.symmetric
+com.example.stegano.steganografia.image
+com.example.stegano.steganografia.keys
+com.example.stegano.steganografia.utils
+com.example.stegano.util

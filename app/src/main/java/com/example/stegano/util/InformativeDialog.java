@@ -22,11 +22,19 @@ public class InformativeDialog extends Dialog implements android.view.View.OnCli
 
     String titleValue, descriptionValue, okButtonValue;
 
+    /**
+     * Activity constructor
+     * @param activity
+     */
     public InformativeDialog(Activity activity) {
         super(activity);
         this.activity = activity;
     }
 
+    /**
+     * Initialize dialog components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,23 +53,42 @@ public class InformativeDialog extends Dialog implements android.view.View.OnCli
 
     }
 
+    /**
+     * Setter for dialog title
+     * @param title
+     */
     public void setDialogTitle(String title) {
         titleValue = title;
     }
 
+    /**
+     * Setter for dialog description
+     * @param description
+     */
     public void setDialogDescription(String description) {
         descriptionValue = description;
     }
 
+    /**
+     * Setter for OK Button title
+     * @param title
+     */
     public void setOkButtonTitle(String title) {
         okButtonValue = title;
     }
 
+    /**
+     * Disable button click
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         dismiss();
     }
 
+    /**
+     * Overwrite text values that are initialized
+     */
     private void initializeTexts() {
         if(titleValue != null) {
             infoTitle.setText(titleValue);

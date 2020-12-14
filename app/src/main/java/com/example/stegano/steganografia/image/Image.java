@@ -2,6 +2,9 @@ package com.example.stegano.steganografia.image;
 
 import android.graphics.Bitmap;
 
+/**
+ * Abstract class for Image
+ */
 public abstract class Image {
 
     public static final String SCALE_REPLICATE = null;

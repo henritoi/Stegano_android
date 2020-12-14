@@ -27,6 +27,12 @@ public class Helpers {
         return element == null;
     }
 
+    /**
+     * Returns bitmap from given Uri
+     * @param mContext
+     * @param sendUri
+     * @return Bitmap bitmap
+     */
     public static Bitmap decodeUriToBitmap(Context mContext, Uri sendUri) {
         Bitmap bitmap = null;
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -48,11 +54,24 @@ public class Helpers {
         return bitmap;
     }
 
+    /**
+     * Read setting value for given setting name from Shared Preferences
+     * @param ctx
+     * @param settingName
+     * @param defaultValue
+     * @return String setting
+     */
     public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(Variables.PREFERENCES_FILE, Context.MODE_PRIVATE);
         return sharedPref.getString(settingName, defaultValue);
     }
 
+    /**
+     * Write new value to given setting in SharedPreferences
+     * @param ctx
+     * @param settingName
+     * @param settingValue
+     */
     public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(Variables.PREFERENCES_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

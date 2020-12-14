@@ -21,6 +21,9 @@ import com.example.stegano.steganografia.crypters.other.CaesarCipher;
 import com.example.stegano.steganografia.crypters.symmetric.AES;
 import com.example.stegano.util.CustomSpinner;
 
+/**
+ * Decoder: Decrypt found message
+ */
 public class DecryptMessageActivity extends AppCompatActivity{
     private static final String TAG = "DecryptMessageActivity";
 
@@ -39,6 +42,10 @@ public class DecryptMessageActivity extends AppCompatActivity{
     LinearLayout caesarCipherLinearLayout;
     Button doneButton;
 
+    /**
+     * Decode decrypt activity onCreate: Initialize activity components
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decrypt_message);
@@ -73,6 +80,9 @@ public class DecryptMessageActivity extends AppCompatActivity{
         doneButton.setOnClickListener(handleDoneButtonClick);
     }
 
+    /**
+     * Watch changes in aesSecretText input
+     */
     private TextWatcher aesSecretTextChanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,7 +99,9 @@ public class DecryptMessageActivity extends AppCompatActivity{
             decryptMessage();
         }
     };
-
+    /**
+     * Watch changes in caesarShiftKey input
+     */
     private TextWatcher caesarShiftKeyChanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,6 +119,9 @@ public class DecryptMessageActivity extends AppCompatActivity{
         }
     };
 
+    /**
+     * Listen changes in Custom spinner menu and handle cryptiontype change
+     */
     private CustomSpinner.OnItemSelectionChangedListener typeChanged
             = new CustomSpinner.OnItemSelectionChangedListener() {
 
@@ -133,6 +148,9 @@ public class DecryptMessageActivity extends AppCompatActivity{
         }
     };
 
+    /**
+     * Decrypt message with given parameters
+     */
     private void decryptMessage() {
         Log.d(TAG, "decryptMessage: DECRYPTING MESSAGE: " + this.decodedMessage);
         Log.d(TAG, "decryptMessage: " + cryptionType);
@@ -162,6 +180,9 @@ public class DecryptMessageActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Handle done button click
+     */
     private View.OnClickListener handleDoneButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

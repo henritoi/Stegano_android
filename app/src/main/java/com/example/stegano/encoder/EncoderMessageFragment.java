@@ -18,7 +18,7 @@ import com.example.stegano.encoder.EncoderEventListener;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Encoder message input fragment
  */
 public class EncoderMessageFragment extends Fragment {
     private static final String TAG = "EncoderMessageFragment";
@@ -29,10 +29,17 @@ public class EncoderMessageFragment extends Fragment {
 
     String message = "";
 
+    /**
+     * Required empty constructor
+     */
     public EncoderMessageFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Listener initialization
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity)
     {
@@ -44,7 +51,13 @@ public class EncoderMessageFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Encoder: Message fragment initialization
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +79,9 @@ public class EncoderMessageFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Watch for changes in message input field
+     */
     private TextWatcher messageChanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

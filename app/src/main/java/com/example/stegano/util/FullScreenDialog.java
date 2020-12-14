@@ -18,6 +18,10 @@ public class FullScreenDialog extends DialogFragment {
         return new FullScreenDialog();
     }
 
+    /**
+     * Create uncancellable full screen dialog
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,13 @@ public class FullScreenDialog extends DialogFragment {
         setCancelable(false);
     }
 
+    /**
+     * Initialize view to dialog
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(

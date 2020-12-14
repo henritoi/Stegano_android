@@ -19,6 +19,9 @@ import com.example.stegano.R;
 
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Used for custom spinner
+ */
 public class SelectionDialog extends Dialog {
     private static final String TAG = "SelectionDialog";
 
@@ -33,10 +36,18 @@ public class SelectionDialog extends Dialog {
 
     public OnSelectionChangedListener listener;
 
+    /**
+     * Contructor for selection dialog
+     * @param context
+     */
     public SelectionDialog(@NonNull Context context) {
         super(context);
     }
 
+    /**
+     * Initialize dialog components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +63,20 @@ public class SelectionDialog extends Dialog {
         initSelectionItems();
     }
 
+    /**
+     * Set all values at the same time
+     * @param values
+     * @param selected
+     */
     public void setValues(CharSequence[] values, int selected) {
         Log.d(TAG, "setValues: " + selected);
         this.values = values;
         this.selectedIndex = selected;
     }
 
+    /**
+     * Initialize selection items
+     */
     private void initSelectionItems() {
         if(!isNull(values) && values.length > 0) {
             for (int i = 0; i < values.length; i++) {
@@ -66,6 +85,12 @@ public class SelectionDialog extends Dialog {
         }
     }
 
+    /**
+     * Generate a single item to the dialog
+     * @param title
+     * @param id
+     * @return
+     */
     private Button generateItem(String title, int id) {
         Log.d(TAG, "generateItem: " + (id == selectedIndex ? "True" : "False"));
         int itemStyle = id == selectedIndex
@@ -81,6 +106,9 @@ public class SelectionDialog extends Dialog {
         return item;
     }
 
+    /**
+     * Handle item selected event
+     */
     private View.OnClickListener itemSelected = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -91,6 +119,10 @@ public class SelectionDialog extends Dialog {
         }
     };
 
+    /**
+     * Set listener to listen selection change event
+     * @param listener
+     */
     public void setOnSelectionChangedListener(OnSelectionChangedListener listener) {
         this.listener = listener;
     }

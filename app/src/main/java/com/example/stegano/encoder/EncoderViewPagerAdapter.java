@@ -11,13 +11,25 @@ import com.example.stegano.encoder.EncoderCryptionSelectionFragment;
 import com.example.stegano.encoder.EncoderImageSelectionFragment;
 import com.example.stegano.encoder.EncoderMessageFragment;
 
+/**
+ * Encder view pager adapter
+ */
 public class EncoderViewPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "EncoderViewPagerAdapter";
 
+    /**
+     * Initialization
+     * @param supportFragmentManager
+     */
     public EncoderViewPagerAdapter(FragmentManager supportFragmentManager) {
         super(supportFragmentManager);
     }
 
+    /**
+     * Initialize view pager pages
+     * @param position
+     * @return
+     */
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -32,6 +44,10 @@ public class EncoderViewPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    /**
+     * Initialize page count for view pager
+     * @return int
+     */
     @Override
     public int getCount() {
         return 3;

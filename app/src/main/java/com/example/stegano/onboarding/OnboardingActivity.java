@@ -18,6 +18,9 @@ import com.example.stegano.encoder.EncoderViewPager;
 import com.example.stegano.encoder.EncoderViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * Onboarding (Get started) screen
+ */
 public class OnboardingActivity extends AppCompatActivity {
     private static final String TAG = "OnboardingActivity";
 
@@ -28,6 +31,10 @@ public class OnboardingActivity extends AppCompatActivity {
     private Button skipButton, nextButton, continueButton;
     private LinearLayout onboardingDefaultButtonsContainer;
 
+    /**
+     * Onboarding activity initialization
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +64,9 @@ public class OnboardingActivity extends AppCompatActivity {
         onboardingDefaultButtonsContainer = findViewById(R.id.onboardingDefaultButtonsContainer);
     }
 
+    /**
+     * Handle click events inside the activity
+     */
     private View.OnClickListener handleClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -81,6 +91,9 @@ public class OnboardingActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Handle view pager page changed events
+     */
     private ViewPager.OnPageChangeListener pageChanged = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -99,6 +112,10 @@ public class OnboardingActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Handle viewpager page change
+     * @param position
+     */
     private void handlePageChange(int position) {
         // Last page
         if(position == this.onboardingViewPagerAdapter.getCount() - 1) {
@@ -128,11 +145,18 @@ public class OnboardingActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * Handle back press
+     */
     @Override
     public void onBackPressed() {
         handleBackPressed();
     }
 
+    /**
+     * Handle back press
+     */
     private void handleBackPressed() {
         if(hasPreviousPage()) {
             onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() - 1);
@@ -142,6 +166,10 @@ public class OnboardingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Check if has previous page (ViewPager)
+     * @return
+     */
     private boolean hasPreviousPage() {
         return onboardingViewPager.getCurrentItem() > 0;
     }

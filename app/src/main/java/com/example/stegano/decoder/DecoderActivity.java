@@ -19,6 +19,9 @@ import com.example.stegano.util.Variables;
 
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Main decoder activity
+ */
 public class DecoderActivity extends AppCompatActivity implements DecoderEventListener {
     private static final String TAG = "DecoderActivity";
 
@@ -29,7 +32,10 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
     private boolean hasSendImage = false;
 
 
-
+    /**
+     * Decoder activity onCreate method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +64,11 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         Log.d(TAG, "onCreate: " + hasSendImage);
     }
 
+    /**
+     * Back button click handle
+     * @param item
+     * @return Boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -66,11 +77,17 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Handle back button pressed
+     */
     @Override
     public void onBackPressed() {
         handleBackPressed();
     }
 
+    /**
+     * Handle go back
+     */
     private void handleBackPressed() {
         Log.d(TAG, "handleBackPressed: " + getSelectedImage());
         if (hasSelectedImage()) {
@@ -81,26 +98,45 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         }
     }
 
+    /**
+     * Show cancel dialog
+     */
     private void showCancelDialog() {
         cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cancelDialog.show();
     }
 
+    /**
+     * Check if has selected image
+     * @return Boolean
+     */
     private boolean hasSelectedImage() {
         return !isNull(selectedImage);
     }
 
+    /**
+     * Setter for selected image
+     * @param image
+     */
     @Override
     public void setSelectedImage(Bitmap image) {
         Log.d(TAG, "setSelectedImage: " + image);
         this.selectedImage = image;
     }
 
+    /**
+     * Getter for selected image
+     * @return Bitmap
+     */
     @Override
     public Bitmap getSelectedImage() {
         return selectedImage;
     }
 
+    /**
+     * Shows error message dialog
+     * @param message
+     */
     @Override
     public void showError(String message) {
         errorDialog.setDialogTitle(getString(R.string.decode_error_title));
@@ -110,6 +146,9 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         errorDialog.show();
     }
 
+    /**
+     * Shows message not found error dialog
+     */
     @Override
     public void noMessageFound() {
         errorDialog.setDialogTitle(getString(R.string.decode_error_title_no_message_found));
@@ -119,6 +158,10 @@ public class DecoderActivity extends AppCompatActivity implements DecoderEventLi
         errorDialog.show();
     }
 
+    /**
+     * Check if has SendImage
+     * @return Boolean
+     */
     @Override
     public boolean hasSendImage() {
         return this.hasSendImage;

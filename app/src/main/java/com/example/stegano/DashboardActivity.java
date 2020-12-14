@@ -22,6 +22,9 @@ import com.example.stegano.util.Variables;
 import static com.example.stegano.util.Helpers.decodeUriToBitmap;
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Dashboard activity: Starting screen for the application
+ */
 public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
 
@@ -31,6 +34,10 @@ public class DashboardActivity extends AppCompatActivity {
 
     private SendDialog sendDialog;
 
+    /**
+     * Initialize activitys components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +65,7 @@ public class DashboardActivity extends AppCompatActivity {
                 handleSendImage(intent);
             }
         }else {
+            // Open Onboarding if first time opening application
             boolean isOnboardingShown = Boolean.parseBoolean(Helpers.readSharedSetting(
                     DashboardActivity.this,
                     Variables.PREF_ONBOARDING_SHOWN,
@@ -72,19 +80,25 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Open Onboarding screen
+     */
     private void openOnboarding() {
         Intent intent = new Intent(DashboardActivity.this, OnboardingActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in_fast, R.anim.fade_out_fast);
     }
 
+    /**
+     * Handle shared image from outside of the application
+     * @param intent
+     */
     private void handleSendImage(Intent intent) {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
         if(!isNull(imageUri)) {
             Bitmap bitmap = decodeUriToBitmap(this, imageUri);
 
             if(isNull(bitmap)) {
-                // TODO: Show error message
                 return;
             }
 
@@ -94,6 +108,9 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handle button click inside the activity
+     */
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

@@ -54,7 +54,7 @@ import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Encoder: Cryption selection
  */
 public class EncoderCryptionSelectionFragment extends Fragment {
     private static final String TAG = "EncoderCryptionSelectio";
@@ -73,9 +73,17 @@ public class EncoderCryptionSelectionFragment extends Fragment {
     LinearLayout aesEncryptionLinearLayout;
     LinearLayout caesarCipherLinearLayout;
 
+    /**
+     * Required empty constructor
+     */
     public EncoderCryptionSelectionFragment() {
         // Required empty public constructor
     }
+
+    /**
+     * Initialize listener
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity)
     {
@@ -87,6 +95,13 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * EncoderCryptionSelection fragment initialization
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,6 +136,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Encode message to the image
+     */
     private void generateImage() {
         if(isValid()) {
             // Get image with listener
@@ -159,7 +177,6 @@ public class EncoderCryptionSelectionFragment extends Fragment {
                 return;
             }
 
-            // TODO: Save image to stegano's dir
             String filename = System.currentTimeMillis() + ".png";
             Uri location = saveImage(encodedImage, filename);
 
@@ -182,6 +199,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Handle generate button click
+     */
     private View.OnClickListener handleGenerateButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -197,6 +217,12 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     };
 
+    /**
+     * Save image to local storage
+     * @param bitmap
+     * @param filename
+     * @return Uri uri
+     */
     private Uri saveImage(Bitmap bitmap, String filename) {
         if(isNull(bitmap)) return null;
 
@@ -254,6 +280,11 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         return saved ? imageUri : null;
     }
 
+    /**
+     * Encrypt message wth selected encryption
+     * @param message
+     * @return byte[] encrypted message
+     */
     private byte[] encryptMessage(String message) {
         switch (cryptionType) {
             case NONE:
@@ -274,6 +305,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         return null;
     }
 
+    /**
+     * Handle custom spinner selection change
+     */
     private CustomSpinner.OnItemSelectionChangedListener typeChanged
             = new CustomSpinner.OnItemSelectionChangedListener() {
 
@@ -301,6 +335,10 @@ public class EncoderCryptionSelectionFragment extends Fragment {
 
     };
 
+    /**
+     * Get selected cryption type
+     * @return CryptionType cryptionType
+     */
     private CryptionType getSelectedCryptionType() {
         switch(encryptionTypeSpinner.getSelectedItem().toString()) {
             case "AES":
@@ -312,6 +350,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Handle Switch if encryption is used
+     */
     private CompoundButton.OnCheckedChangeListener useEncryptionSwitchChanged = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -329,6 +370,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     };
 
+    /**
+     * Listen change in aes text input
+     */
     private TextWatcher aesSecretTextChanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -346,6 +390,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     };
 
+    /**
+     * Listen change in shiftkey text input
+     */
     private TextWatcher caesarShiftKeyChanged = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -363,6 +410,9 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     };
 
+    /**
+     * Toggle generate button if valid
+     */
     private void validate() {
         if(isValid()) {
             generateButton.setEnabled(true);
@@ -371,6 +421,10 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Check if given input is valid
+     * @return Boolean valid
+     */
     private boolean isValid() {
         if(cryptionType == CryptionType.NONE) return true;
 
@@ -388,6 +442,12 @@ public class EncoderCryptionSelectionFragment extends Fragment {
         return false;
     }
 
+    /**
+     * Check if app has required permissions to write to local storage
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {

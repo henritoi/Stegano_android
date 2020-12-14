@@ -4,6 +4,9 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+/**
+ * "Global memory"
+ */
 public class MainApplication extends Application {
     private static final String TAG = "MainApplication";
 

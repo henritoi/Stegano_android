@@ -20,6 +20,9 @@ import java.io.File;
 
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Encoder: Success screen
+ */
 public class EncodeSuccessActivity extends AppCompatActivity {
     private static final String TAG = "EncodeSuccessActivity";
 
@@ -31,7 +34,10 @@ public class EncodeSuccessActivity extends AppCompatActivity {
 
     private MainApplication application;
 
-
+    /**
+     * Initialize activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,9 @@ public class EncodeSuccessActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handle button clicks inside the activity
+     */
     private View.OnClickListener handleButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -81,12 +90,18 @@ public class EncodeSuccessActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Handle back press
+     */
     @Override
     public void onBackPressed() {
         application.clearBitmap();
         finish();
     }
 
+    /**
+     * Handle image share option
+     */
     private void shareImage() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("image/png");

@@ -37,7 +37,7 @@ import static com.example.stegano.util.Helpers.isNull;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment for Decoder in which image selection is handled
  */
 public class DecoderImageSelectionFragment extends Fragment {
     private static final String TAG = "DecoderImageSelectionFr";
@@ -59,11 +59,17 @@ public class DecoderImageSelectionFragment extends Fragment {
 
     private MainApplication application;
 
-
+    /**
+     * Empty constructor
+     */
     public DecoderImageSelectionFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Event listener initialization
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity)
     {
@@ -75,7 +81,13 @@ public class DecoderImageSelectionFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Fragment onCreateView: View component initialization
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -117,6 +129,9 @@ public class DecoderImageSelectionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Handle button clicks in this fragment
+     */
     private View.OnClickListener handleButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -137,6 +152,9 @@ public class DecoderImageSelectionFragment extends Fragment {
         }
     };
 
+    /**
+     * Handle image selection from gallery
+     */
     private void pickExistingImage() {
         if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -150,6 +168,9 @@ public class DecoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Reset image selection process
+     */
     private void removeImageSelection() {
         isImageSelected = false;
         listener.setSelectedImage(null);
@@ -159,6 +180,12 @@ public class DecoderImageSelectionFragment extends Fragment {
         imageSelectedButtonsLinearLayout.setVisibility(View.GONE);
     }
 
+    /**
+     * Handle Image selection from gallery
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -200,14 +227,23 @@ public class DecoderImageSelectionFragment extends Fragment {
         }
     }
 
+    /**
+     * Show loading animation
+     */
     private void showLoader() {
         loadingScreen.show(getActivity().getSupportFragmentManager(), "loader");
     }
 
+    /**
+     * Hide loading animation
+     */
     private void hideLoader() {
         loadingScreen.dismiss();
     }
 
+    /**
+     * Handle image decode and if message was not found
+     */
     private void decodeImage() {
         final Bitmap bitmap = listener.getSelectedImage();
 

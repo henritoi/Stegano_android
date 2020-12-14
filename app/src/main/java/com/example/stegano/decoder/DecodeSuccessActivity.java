@@ -16,6 +16,9 @@ import com.example.stegano.R;
 
 import static com.example.stegano.util.Helpers.isNull;
 
+/**
+ * Decoder decode successful activity
+ */
 public class DecodeSuccessActivity extends AppCompatActivity {
     private static final String TAG = "DecodeSuccessActivity";
 
@@ -26,6 +29,10 @@ public class DecodeSuccessActivity extends AppCompatActivity {
 
     private MainApplication application;
 
+    /**
+     * Decode success activity onCreate: Initialize activity components
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,9 @@ public class DecodeSuccessActivity extends AppCompatActivity {
         decodedMessageTextView.setText(decodedMessage);
     }
 
+    /**
+     * Handle button clicks inside the activity
+     */
     private View.OnClickListener handleButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -72,6 +82,9 @@ public class DecodeSuccessActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Handle back pressed and clear global message variable
+     */
     @Override
     public void onBackPressed() {
         application.clearMessage();
